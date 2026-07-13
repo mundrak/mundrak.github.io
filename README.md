@@ -1,4 +1,4 @@
-# Khushi Mundra — Chai pe Charcha
+# Khushi Mundra - Coffee par Charcha
 
 Personal portfolio site, built from the "3b — Chai pe Charcha" design direction.
 
