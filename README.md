@@ -1,6 +1,6 @@
 # Khushi Mundra - Coffee par Charcha
 
-Personal portfolio site, built from the "3b — Chai pe Charcha" design direction.
+Personal portfolio site.
 
 ## Develop
 
