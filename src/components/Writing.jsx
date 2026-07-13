@@ -2,7 +2,7 @@ export default function Writing() {
   return (
     <div id="writing" className="writing-section">
       <div className="writing-inner">
-        <div className="kicker writing-kicker">03 · The writing</div>
+        <div className="kicker writing-kicker">04 · The writing</div>
         <div className="writing-grid">
           <div>
             <h2 className="writing-title">

@@ -52,7 +52,7 @@ export default function Wandering() {
 
   return (
     <div id="wandering" className="wander-section">
-      <div className="kicker">04 · The wandering</div>
+      <div className="kicker">05 · The wandering</div>
       <div className="work-header">
         <h2 className="wander-title">
           Lived in some cities. Wandered many more.
