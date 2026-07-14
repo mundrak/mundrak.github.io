@@ -231,7 +231,7 @@
     grid-template-columns: 1fr;
   }
   .hero-photo-wrap {
-    justify-self: start;
+    justify-self: stretch;
     margin-top: 20px;
   }
 }
