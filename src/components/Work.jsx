@@ -5,7 +5,7 @@ const SHOW_MASALA = true;
 const JOBS = [
   {
     now: true,
-    meta: '2026 — · Remote, Bangkok quarterly 🇹🇭',
+    meta: '2026 — · Remote, Bangkok 🇹🇭',
     title: 'Marketing Consultant · SabaiHealth',
     desc: 'Setting up marketing from scratch — the whole engine, zero to one.',
     bullets: [
@@ -16,7 +16,7 @@ const JOBS = [
     ],
   },
   {
-    meta: '2025 – 26 · Remote, Bengaluru for events 🇮🇳',
+    meta: '2025 – 26 · Remote, Bengaluru 🇮🇳',
     title: 'Sr. Marketing Associate · LVX',
     desc: 'Brand launches and lead-gen engines — shoulder to shoulder with founders.',
     bullets: [
@@ -38,7 +38,7 @@ const JOBS = [
     scribble: 'what ma, ask me about the sausage rolls',
   },
   {
-    meta: '2021 – 23 · Remote, Mumbai in peak season 🇮🇳',
+    meta: '2021 – 23 · Remote, Mumbai 🇮🇳',
     title: 'Marketing Ops · Miko',
     desc: 'Sold robots to kids and logic to their parents. Intern → full-time in 18 months.',
     bullets: [
