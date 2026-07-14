@@ -6,7 +6,7 @@ export default function Writing() {
         <div className="writing-grid">
           <div>
             <h2 className="writing-title">
-              Learn. De-learn.
+              Learn. De‑learn.
               <br />
               Repeat.
             </h2>
