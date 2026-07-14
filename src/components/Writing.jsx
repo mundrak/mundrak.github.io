@@ -74,7 +74,12 @@ export default function Writing() {
                 On India, freedom &amp; the stroke of the midnight hour
               </div>
             </a>
-            <div className="writing-card diss">
+            <a
+              className="writing-card diss"
+              href="https://drive.google.com/file/d/10RYAqxsU8YqkmfiDBU6UftQXoTi3b7mN/view"
+              target="_blank"
+              rel="noreferrer"
+            >
               <div>
                 <div className="writing-card-label">Dissertation</div>
                 <div className="writing-piece-title" style={{ marginTop: 5 }}>
@@ -82,7 +87,7 @@ export default function Writing() {
                 </div>
               </div>
               <div className="writing-arrow">→</div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
