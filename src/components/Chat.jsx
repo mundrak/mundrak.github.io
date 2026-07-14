@@ -9,7 +9,7 @@ const BUBBLES = [
   {
     side: 'right',
     delay: 0.85,
-    text: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me. Followed that feeling from Chennai to Mumbai to Edinburgh to Bangkok.',
+    text: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me feel. Been chasing that feeling from Chennai to Mumbai to Edinburgh to Bangkok.',
   },
   { side: 'left', delay: 1.1, text: "And when you're not working?" },
   {
@@ -17,7 +17,7 @@ const BUBBLES = [
     delay: 1.35,
     text: "Eating my way through a new city, third coffee in hand, reading the news like it's gossip. Then writing about all of it.",
   },
-  { side: 'left', delay: 1.6, text: 'One thing you believe?' },
+  { side: 'left', delay: 1.6, text: 'One thing you believe in?' },
   {
     side: 'right',
     delay: 1.85,
@@ -35,7 +35,7 @@ export default function Chat() {
           <h2 className="section-title">The conversation, basically</h2>
           <p className="section-lead">
             Everything a first coffee with me covers, minus the part where I
-            steal your fries.
+            finish your plate before you do.
           </p>
           <div className="chat-cup">
             <svg
@@ -56,7 +56,7 @@ export default function Chat() {
           </div>
           <div className="resume-cta-wrap">
             <a
-              href={`${import.meta.env.BASE_URL}khushi-mundra-resume.pdf`}
+              href="/khushi-mundra-resume.pdf"
               target="_blank"
               rel="noreferrer"
               className="resume-btn"

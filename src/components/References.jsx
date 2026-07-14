@@ -3,6 +3,15 @@ const SHOW_MASALA = true;
 const TESTIMONIALS = [
   {
     quote:
+      'Khushi has been an active contributor to our projects and a valued team player. She is very sincere and makes sure that every task assigned to her provides the best ROI. We recommend Khushi to any future employer — I am confident she will be a valued addition to your team.',
+    initials: 'AS',
+    color: 'pill-sage',
+    name: 'Ashish Singh',
+    role: 'Co-Founder, iGenPod',
+    rotate: 0.6,
+  },
+  {
+    quote:
       'Pragmatic and diligent, Khushi was absolutely committed to the whole purpose of Speakeasy — enabling others to improve. Consistently asking for feedback and looking for opportunities to grow leaves me comfortable that Khushi will excel regardless of the next step in her career.',
     initials: 'SF',
     color: 'pill-peach',
@@ -18,15 +27,6 @@ const TESTIMONIALS = [
     name: 'Jo McLaren',
     role: 'Speakeasy, University of Edinburgh Business School',
     rotate: 0.5,
-  },
-  {
-    quote:
-      'Khushi has been an active contributor to our projects and a valued team player. She is very sincere and makes sure that every task assigned to her provides the best ROI. We recommend Khushi to any future employer — I am confident she will be a valued addition to your team.',
-    initials: 'AS',
-    color: 'pill-sage',
-    name: 'Ashish Singh',
-    role: 'Co-Founder, iGenPod',
-    rotate: 0.6,
   },
 ];
 
