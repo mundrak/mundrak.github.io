@@ -56,7 +56,7 @@ export default function Hero() {
               className="hero-photo"
               src={heroPhoto}
               alt="Khushi mid-laugh"
-              style={{ objectPosition: '42.4% 72.2%', transform: 'scale(1.34)' }}
+              style={{ objectPosition: '50% 40%', transform: 'scale(1)' }}
             />
           </div>
           <div className="hero-badge">100% me</div>
