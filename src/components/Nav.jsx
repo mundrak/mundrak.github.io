@@ -1,11 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const navRef = useRef(null);
   const close = () => setOpen(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const handleOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('touchstart', handleOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('touchstart', handleOutside);
+    };
+  }, [open]);
+
   return (
-    <div className="nav">
+    <div className="nav" ref={navRef}>
       <div className="nav-inner">
         <a href="#top" className="nav-logo" onClick={close}>
           khushi<span>.</span>
