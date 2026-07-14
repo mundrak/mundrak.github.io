@@ -17,7 +17,7 @@ export default function Hero() {
             you found me.
           </h1>
           <p className="hero-lead">
-            I'm Khushi — engineer by degree, marketer by destiny, foodie by
+            I am Khushi — engineer by degree, marketer by destiny, foodie by
             heart. Currently making healthcare feel human at SabaiHealth,
             Bangkok. Pull up a chair, the coffee's on me.
           </p>
