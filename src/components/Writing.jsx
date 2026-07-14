@@ -16,7 +16,9 @@ export default function Writing() {
               from scratch.
             </p>
             <a
-              href="mailto:mundrakhushi22@gmail.com"
+              href="https://khushimundra.substack.com/"
+              target="_blank"
+              rel="noreferrer"
               className="writing-cta"
             >
               get the next essay in your inbox
