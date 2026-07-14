@@ -52,12 +52,7 @@ export default function Hero() {
         </div>
         <div className="hero-photo-wrap">
           <div className="hero-photo-frame">
-            <img
-              className="hero-photo"
-              src={heroPhoto}
-              alt="Khushi mid-laugh"
-              style={{ objectPosition: '50% 40%', transform: 'scale(1)' }}
-            />
+            <img className="hero-photo" src={heroPhoto} alt="Khushi mid-laugh" />
           </div>
           <div className="hero-badge">100% me</div>
           {SHOW_MASALA && <div className="hero-sticker">sahi hai ✨</div>}

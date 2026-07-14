@@ -199,6 +199,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  object-position: 50% 40%;
 }
 .hero-badge {
   position: absolute;
@@ -246,6 +247,9 @@
     width: 100%;
     height: 340px;
     transform: none;
+  }
+  .hero-photo {
+    object-position: 50% 85%;
   }
   .hero-badge {
     top: -10px;
