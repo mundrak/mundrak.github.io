@@ -248,10 +248,16 @@
     transform: none;
   }
   .hero-badge {
-    right: -12px;
+    top: -10px;
+    right: -10px;
+    font-size: 17px;
+    padding: 5px 14px;
   }
   .hero-sticker {
-    left: -12px;
+    bottom: -10px;
+    left: -10px;
+    font-size: 16px;
+    padding: 6px 14px;
   }
 }
 
