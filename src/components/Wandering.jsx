@@ -83,7 +83,7 @@ export default function Wandering() {
           </span>
         ))}
         {SHOW_MASALA && (
-          <span className="wander-scribble">…the list is not done</span>
+          <span className="wander-scribble">The list is not done yet</span>
         )}
       </div>
 

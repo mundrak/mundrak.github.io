@@ -4,13 +4,26 @@ const SHOW_MASALA = true;
 
 const JOBS = [
   {
-    meta: '2021 – 23 · Remote, Mumbai in peak season 🇮🇳',
-    title: 'Marketing Ops · Miko',
-    desc: 'Sold robots to kids and logic to their parents. Intern → full-time in 18 months.',
+    now: true,
+    meta: '2026 — · Remote, Bangkok quarterly 🇹🇭',
+    title: 'Marketing Consultant · SabaiHealth',
+    desc: 'Setting up marketing from scratch — the whole engine, zero to one.',
     bullets: [
-      <>Multi-channel CRM campaigns (Airship) — email open rates <strong>+20%</strong>, CTR <strong>+15%</strong></>,
-      <>Mixpanel-driven targeting &amp; messaging optimisation</>,
-      <>Curated &amp; onboarded content for <strong>300+ apps</strong> on the Miko robot</>,
+      <><strong>Branding</strong> — identity, voice &amp; positioning built from the ground up</>,
+      <><strong>Social media</strong> — channels, content strategy &amp; calendar from day one</>,
+      <><strong>Meta ads</strong> — paid acquisition set up &amp; scaled end-to-end</>,
+      <><strong>Influencer marketing</strong> — sourcing, partnerships &amp; campaign management</>,
+    ],
+  },
+  {
+    meta: '2025 – 26 · Remote, Bengaluru for events 🇮🇳',
+    title: 'Sr. Marketing Associate · LVX',
+    desc: 'Brand launches and lead-gen engines — shoulder to shoulder with founders.',
+    bullets: [
+      <>Led the <strong>LetsVenture → LVX rebrand</strong> + brand identity for PhotonX, LVXQ &amp; PitchRoom</>,
+      <><strong>~480% lead growth</strong> via end-to-end email campaigns; <strong>1,000+ investor leads</strong> at ₹50 CPL on LinkedIn Ads</>,
+      <>Founder's brand: Substack subscribers <strong>+50%</strong>, content views <strong>~+1100%</strong></>,
+      <>Domain authority <strong>+25%</strong> through SEO; Instagram views <strong>+200%</strong></>,
     ],
   },
   {
@@ -25,26 +38,13 @@ const JOBS = [
     scribble: 'what ma, ask me about the sausage rolls',
   },
   {
-    meta: '2025 – 26 · Remote, Bengaluru for events 🇮🇳',
-    title: 'Sr. Marketing Associate · LVX',
-    desc: 'Brand launches and lead-gen engines — shoulder to shoulder with founders.',
+    meta: '2021 – 23 · Remote, Mumbai in peak season 🇮🇳',
+    title: 'Marketing Ops · Miko',
+    desc: 'Sold robots to kids and logic to their parents. Intern → full-time in 18 months.',
     bullets: [
-      <>Led the <strong>LetsVenture → LVX rebrand</strong> + brand identity for PhotonX, LVXQ &amp; PitchRoom</>,
-      <><strong>~480% lead growth</strong> via end-to-end email campaigns; <strong>1,000+ investor leads</strong> at ₹50 CPL on LinkedIn Ads</>,
-      <>Founder's brand: Substack subscribers <strong>+50%</strong>, content views <strong>~+1100%</strong></>,
-      <>Domain authority <strong>+25%</strong> through SEO; Instagram views <strong>+200%</strong></>,
-    ],
-  },
-  {
-    now: true,
-    meta: '2026 — · Remote, Bangkok quarterly 🇹🇭',
-    title: 'Marketing Consultant · SabaiHealth',
-    desc: 'Setting up marketing from scratch — the whole engine, zero to one.',
-    bullets: [
-      <><strong>Branding</strong> — identity, voice &amp; positioning built from the ground up</>,
-      <><strong>Social media</strong> — channels, content strategy &amp; calendar from day one</>,
-      <><strong>Meta ads</strong> — paid acquisition set up &amp; scaled end-to-end</>,
-      <><strong>Influencer marketing</strong> — sourcing, partnerships &amp; campaign management</>,
+      <>Multi-channel CRM campaigns (Airship) — email open rates <strong>+20%</strong>, CTR <strong>+15%</strong></>,
+      <>Mixpanel-driven targeting &amp; messaging optimisation</>,
+      <>Curated &amp; onboarded content for <strong>300+ apps</strong> on the Miko robot</>,
     ],
   },
 ];
