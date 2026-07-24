@@ -5,6 +5,13 @@ export default function Nav() {
   const navRef = useRef(null);
   const close = () => setOpen(false);
 
+  const goTop = (e) => {
+    e.preventDefault();
+    close();
+    document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  };
+
   useEffect(() => {
     if (!open) return;
     const handleOutside = (e) => {
@@ -23,7 +30,7 @@ export default function Nav() {
   return (
     <div className="nav" ref={navRef}>
       <div className="nav-inner">
-        <a href="#top" className="nav-logo" onClick={close}>
+        <a href="#top" className="nav-logo" onClick={goTop}>
           khushi<span>.</span>
         </a>
         <button
