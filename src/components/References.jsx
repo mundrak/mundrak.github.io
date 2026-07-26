@@ -3,6 +3,15 @@ const SHOW_MASALA = true;
 const TESTIMONIALS = [
   {
     quote:
+      'Accountability and extreme ownership is part of Khushi\'s DNA. It does not matter if she is reporting to you or you are reporting to her, if anything slips, be prepared for the Pikachu to stare at you say "Areee!"',
+    initials: 'DM',
+    color: 'pill-sage',
+    name: 'Divyansh Meena',
+    role: 'Manager (Sankalp) at Intellecap',
+    rotate: -0.4,
+  },
+  {
+    quote:
       'Khushi has been an active contributor to our projects and a valued team player. She is very sincere and makes sure that every task assigned to her provides the best ROI. We recommend Khushi to any future employer — I am confident she will be a valued addition to your team.',
     initials: 'AS',
     color: 'pill-sage',
@@ -58,17 +67,6 @@ export default function References() {
             </div>
           </div>
         ))}
-        <div className="reference-card" style={{ transform: 'rotate(-.5deg)' }}>
-          <div className="reference-quote-mark">&ldquo;</div>
-          <p className="reference-quote-pending">one more brewing… ☕</p>
-          <div className="reference-attribution">
-            <div className="reference-avatar pill-peach">?</div>
-            <div>
-              <div className="reference-name">Coming soon</div>
-              <div className="reference-role">watch this space</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
