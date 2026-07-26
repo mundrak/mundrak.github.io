@@ -16,7 +16,7 @@ const TESTIMONIALS = [
     initials: 'AS',
     color: 'pill-sage',
     name: 'Ashish Singh',
-    role: 'Co-Founder, iGenPod',
+    role: 'Head of AI Products, CheQ',
     rotate: 0.6,
   },
   {
