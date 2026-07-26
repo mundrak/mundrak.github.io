@@ -592,6 +592,8 @@
   border-radius: 24px;
   padding: 30px 32px;
   box-shadow: 0 4px 18px rgba(51, 41, 31, 0.07);
+  display: flex;
+  flex-direction: column;
 }
 .reference-quote-mark {
   font-size: 34px;
@@ -614,7 +616,8 @@
   transform: rotate(-1deg);
 }
 .reference-attribution {
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 18px;
   display: flex;
   align-items: center;
   gap: 12px;

@@ -15,7 +15,7 @@ const TESTIMONIALS = [
       'Khushi has been an active contributor to our projects and a valued team player. She is very sincere and makes sure that every task assigned to her provides the best ROI. We recommend Khushi to any future employer — I am confident she will be a valued addition to your team.',
     initials: 'AS',
     color: 'pill-sage',
-    name: 'Ashish Singh',
+    name: 'Ashish Shekhawat',
     role: 'Head of AI Products, CheQ',
     rotate: 0.6,
   },
