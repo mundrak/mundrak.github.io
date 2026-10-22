@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const SHOW_MASALA = true;
 
@@ -45,75 +45,16 @@ const TESTIMONIALS = [
   },
 ];
 
-const STICK_TOP = 96;
-
 export default function References() {
-  const pinWrapRef = useRef(null);
-  const pinInnerRef = useRef(null);
   const trackRef = useRef(null);
-  const dotRefs = useRef([]);
 
-  useEffect(() => {
-    let frame = null;
-    let scrollDistance = 0;
-
-    const isPinned = () => window.matchMedia('(min-width: 761px)').matches;
-
-    const measure = () => {
-      const track = trackRef.current;
-      const inner = pinInnerRef.current;
-      const wrap = pinWrapRef.current;
-      if (!track || !inner || !wrap) return;
-
-      if (!isPinned()) {
-        wrap.style.height = '';
-        return;
-      }
-
-      scrollDistance = Math.max(track.scrollWidth - inner.offsetWidth, 0);
-      wrap.style.height = `${scrollDistance + inner.offsetHeight}px`;
-    };
-
-    const update = () => {
-      frame = null;
-      const wrap = pinWrapRef.current;
-      const track = trackRef.current;
-      if (!wrap || !track || !isPinned()) return;
-
-      const inner = pinInnerRef.current;
-      const range = Math.max(wrap.offsetHeight - inner.offsetHeight, 1);
-      const rect = wrap.getBoundingClientRect();
-      const progress = Math.min(Math.max((STICK_TOP - rect.top) / range, 0), 1);
-
-      track.style.transform = `translateX(${-progress * scrollDistance}px)`;
-
-      const active = Math.min(
-        TESTIMONIALS.length - 1,
-        Math.round(progress * (TESTIMONIALS.length - 1))
-      );
-      dotRefs.current.forEach((dot, i) => {
-        if (dot) dot.classList.toggle('is-active', i === active);
-      });
-    };
-
-    const onScroll = () => {
-      if (frame === null) frame = requestAnimationFrame(update);
-    };
-    const onResize = () => {
-      measure();
-      update();
-    };
-
-    measure();
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-      if (frame !== null) cancelAnimationFrame(frame);
-    };
-  }, []);
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector('.reference-card');
+    const amount = card ? card.offsetWidth + 24 : 340;
+    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  };
 
   return (
     <div id="references" className="references-section">
@@ -125,34 +66,39 @@ export default function References() {
         )}
       </div>
 
-      <div className="references-pin-wrap" ref={pinWrapRef}>
-        <div className="references-pin-inner" ref={pinInnerRef}>
-          <div className="references-track-h" ref={trackRef}>
-            {TESTIMONIALS.map((t, i) => (
-              <div className="reference-card" key={t.name}>
-                <div className="reference-stack-index">{String(i + 1).padStart(2, '0')}</div>
-                <div className="reference-quote-mark">&ldquo;</div>
-                <p className="reference-quote">{t.quote}</p>
-                <div className="reference-attribution">
-                  <div className={`reference-avatar pill-${t.color}`}>{t.initials}</div>
-                  <div>
-                    <div className="reference-name">{t.name}</div>
-                    <div className="reference-role">{t.role}</div>
-                  </div>
+      <div className="references-carousel">
+        <button
+          type="button"
+          className="references-arrow references-arrow-prev"
+          aria-label="Previous testimonial"
+          onClick={() => scrollByCard(-1)}
+        >
+          ←
+        </button>
+        <div className="references-track-h" ref={trackRef}>
+          {TESTIMONIALS.map((t, i) => (
+            <div className="reference-card" key={t.name}>
+              <div className="reference-stack-index">{String(i + 1).padStart(2, '0')}</div>
+              <div className="reference-quote-mark">&ldquo;</div>
+              <p className="reference-quote">{t.quote}</p>
+              <div className="reference-attribution">
+                <div className={`reference-avatar pill-${t.color}`}>{t.initials}</div>
+                <div>
+                  <div className="reference-name">{t.name}</div>
+                  <div className="reference-role">{t.role}</div>
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="references-dots-h" aria-hidden="true">
-            {TESTIMONIALS.map((t, i) => (
-              <span
-                className="references-dot"
-                key={t.name}
-                ref={(el) => (dotRefs.current[i] = el)}
-              />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+        <button
+          type="button"
+          className="references-arrow references-arrow-next"
+          aria-label="Next testimonial"
+          onClick={() => scrollByCard(1)}
+        >
+          →
+        </button>
       </div>
     </div>
   );

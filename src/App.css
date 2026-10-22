@@ -581,38 +581,52 @@
   padding: 80px 40px 30px;
   scroll-margin-top: 80px;
 }
-.references-pin-wrap {
-  position: relative;
+.references-carousel {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   margin-top: 36px;
-}
-.references-pin-inner {
-  position: sticky;
-  top: 96px;
-  overflow: hidden;
-  padding-bottom: 8px;
 }
 .references-track-h {
   display: flex;
   align-items: flex-start;
   gap: 24px;
-  will-change: transform;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+  padding: 4px 2px 18px;
+  flex: 1;
+  min-width: 0;
+  scrollbar-width: thin;
 }
-.references-dots-h {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 22px;
+.references-track-h::-webkit-scrollbar {
+  height: 6px;
 }
-.references-dot {
-  width: 7px;
-  height: 7px;
+.references-track-h::-webkit-scrollbar-thumb {
+  background: rgba(51, 41, 31, 0.15);
+  border-radius: 6px;
+}
+.references-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--border);
-  transition: all 0.25s ease;
+  border: none;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(51, 41, 31, 0.12);
+  font-size: 18px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+  margin-top: 4px;
 }
-.references-dot.is-active {
+.references-arrow:hover {
   background: var(--orange);
-  width: 22px;
+  color: #fff;
+  transform: scale(1.06);
 }
 .reference-card {
   position: relative;
@@ -624,6 +638,7 @@
   flex-direction: column;
   flex: 0 0 auto;
   width: min(420px, 80vw);
+  scroll-snap-align: start;
 }
 .reference-stack-index {
   position: absolute;
@@ -682,34 +697,12 @@
   color: var(--ink-soft);
 }
 @media (max-width: 760px) {
-  .references-pin-wrap {
-    height: auto !important;
-  }
-  .references-pin-inner {
-    position: static;
-    overflow: visible;
-  }
-  .references-track-h {
-    transform: none !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 2px;
-    padding: 4px 2px 18px;
-  }
-  .references-track-h::-webkit-scrollbar {
-    height: 6px;
-  }
-  .references-track-h::-webkit-scrollbar-thumb {
-    background: rgba(51, 41, 31, 0.15);
-    border-radius: 6px;
-  }
-  .references-dots-h {
+  .references-arrow {
     display: none;
   }
   .reference-card {
     width: 86vw;
     padding: 28px 24px;
-    scroll-snap-align: start;
   }
   .reference-stack-index {
     font-size: 28px;
