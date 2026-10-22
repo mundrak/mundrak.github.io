@@ -3,6 +3,15 @@ const SHOW_MASALA = true;
 const TESTIMONIALS = [
   {
     quote:
+      'Khushi has an infectious attitude to work and is always ready to push forward, learn and pursue new ideas, concepts and products. She is a trusted resource, and I would recommend her to any new organisation.',
+    initials: 'RN',
+    color: 'pill-butter',
+    name: 'Rohit Nambiar',
+    role: 'Co-Founder & CEO, SabaiHealth',
+    rotate: 0.5,
+  },
+  {
+    quote:
       'Accountability and extreme ownership is part of Khushi\'s DNA. It does not matter if she is reporting to you or you are reporting to her, if anything slips, be prepared for the Pikachu to stare at you say "Areee!"',
     initials: 'DM',
     color: 'pill-sage',
