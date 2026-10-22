@@ -45,54 +45,72 @@ const TESTIMONIALS = [
   },
 ];
 
-const STICK_TOP = 90;
-const STACK_GAP = 26;
+const STICK_TOP = 96;
 
 export default function References() {
-  const wrapperRefs = useRef([]);
-  const cardRefs = useRef([]);
+  const pinWrapRef = useRef(null);
+  const pinInnerRef = useRef(null);
+  const trackRef = useRef(null);
   const dotRefs = useRef([]);
 
   useEffect(() => {
     let frame = null;
+    let scrollDistance = 0;
+
+    const isPinned = () => window.matchMedia('(min-width: 761px)').matches;
+
+    const measure = () => {
+      const track = trackRef.current;
+      const inner = pinInnerRef.current;
+      const wrap = pinWrapRef.current;
+      if (!track || !inner || !wrap) return;
+
+      if (!isPinned()) {
+        wrap.style.height = '';
+        return;
+      }
+
+      scrollDistance = Math.max(track.scrollWidth - inner.offsetWidth, 0);
+      wrap.style.height = `${scrollDistance + inner.offsetHeight}px`;
+    };
 
     const update = () => {
       frame = null;
-      let active = 0;
+      const wrap = pinWrapRef.current;
+      const track = trackRef.current;
+      if (!wrap || !track || !isPinned()) return;
 
-      wrapperRefs.current.forEach((wrapper, i) => {
-        const card = cardRefs.current[i];
-        if (!wrapper || !card) return;
+      const inner = pinInnerRef.current;
+      const range = Math.max(wrap.offsetHeight - inner.offsetHeight, 1);
+      const rect = wrap.getBoundingClientRect();
+      const progress = Math.min(Math.max((STICK_TOP - rect.top) / range, 0), 1);
 
-        const stickyTop = STICK_TOP + i * STACK_GAP;
-        const rect = wrapper.getBoundingClientRect();
-        const cardHeight = card.offsetHeight;
-        const range = Math.max(rect.height - cardHeight, 1);
-        const progress = Math.min(Math.max((stickyTop - rect.top) / range, 0), 1);
+      track.style.transform = `translateX(${-progress * scrollDistance}px)`;
 
-        card.style.transform = `scale(${1 - progress * 0.06}) translateY(${-progress * 10}px)`;
-        card.style.opacity = String(1 - progress * 0.25);
-        card.style.filter = `brightness(${1 - progress * 0.08})`;
-
-        if (rect.top <= stickyTop + 2) active = i;
-      });
-
+      const active = Math.min(
+        TESTIMONIALS.length - 1,
+        Math.round(progress * (TESTIMONIALS.length - 1))
+      );
       dotRefs.current.forEach((dot, i) => {
-        if (!dot) return;
-        dot.classList.toggle('is-active', i === active);
+        if (dot) dot.classList.toggle('is-active', i === active);
       });
     };
 
     const onScroll = () => {
       if (frame === null) frame = requestAnimationFrame(update);
     };
+    const onResize = () => {
+      measure();
+      update();
+    };
 
+    measure();
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onResize);
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
       if (frame !== null) cancelAnimationFrame(frame);
     };
   }, []);
@@ -107,19 +125,11 @@ export default function References() {
         )}
       </div>
 
-      <div className="references-stack-row">
-        <div className="references-stack">
-          {TESTIMONIALS.map((t, i) => (
-            <div
-              className="reference-stack-item"
-              key={t.name}
-              ref={(el) => (wrapperRefs.current[i] = el)}
-            >
-              <div
-                className={`reference-card card-${t.color}`}
-                style={{ top: `${STICK_TOP + i * STACK_GAP}px`, zIndex: i + 1 }}
-                ref={(el) => (cardRefs.current[i] = el)}
-              >
+      <div className="references-pin-wrap" ref={pinWrapRef}>
+        <div className="references-pin-inner" ref={pinInnerRef}>
+          <div className="references-track-h" ref={trackRef}>
+            {TESTIMONIALS.map((t, i) => (
+              <div className="reference-card" key={t.name}>
                 <div className="reference-stack-index">{String(i + 1).padStart(2, '0')}</div>
                 <div className="reference-quote-mark">&ldquo;</div>
                 <p className="reference-quote">{t.quote}</p>
@@ -131,11 +141,9 @@ export default function References() {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="references-dots-rail">
-          <div className="references-dots" aria-hidden="true">
+            ))}
+          </div>
+          <div className="references-dots-h" aria-hidden="true">
             {TESTIMONIALS.map((t, i) => (
               <span
                 className="references-dot"

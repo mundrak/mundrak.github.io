@@ -581,26 +581,26 @@
   padding: 80px 40px 30px;
   scroll-margin-top: 80px;
 }
-.references-stack-row {
-  display: flex;
-  gap: 20px;
+.references-pin-wrap {
+  position: relative;
   margin-top: 36px;
 }
-.references-stack {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-}
-.references-dots-rail {
-  width: 16px;
-  position: relative;
-}
-.references-dots {
+.references-pin-inner {
   position: sticky;
-  top: 46vh;
+  top: 96px;
+  overflow: hidden;
+  padding-bottom: 8px;
+}
+.references-track-h {
   display: flex;
-  flex-direction: column;
+  gap: 24px;
+  will-change: transform;
+}
+.references-dots-h {
+  display: flex;
+  justify-content: center;
   gap: 10px;
+  margin-top: 22px;
 }
 .references-dot {
   width: 7px;
@@ -611,43 +611,26 @@
 }
 .references-dot.is-active {
   background: var(--orange);
-  height: 22px;
-}
-.reference-stack-item {
-  position: relative;
-  height: max(88vh, 620px);
-}
-.reference-stack-item:last-child {
-  height: max(62vh, 480px);
+  width: 22px;
 }
 .reference-card {
-  position: sticky;
+  position: relative;
   background: #fff;
   border-radius: 28px;
   padding: 36px 40px;
-  box-shadow: 0 18px 44px rgba(51, 41, 31, 0.14);
+  box-shadow: 0 10px 30px rgba(51, 41, 31, 0.08);
   display: flex;
   flex-direction: column;
-  max-width: 640px;
-  margin: 0 auto;
-  will-change: transform, opacity;
-}
-.card-peach {
-  background: var(--peach);
-}
-.card-sage {
-  background: var(--sage);
-}
-.card-butter {
-  background: var(--butter);
+  flex: 0 0 auto;
+  width: min(420px, 80vw);
 }
 .reference-stack-index {
   position: absolute;
   top: 20px;
   right: 28px;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 46px;
-  color: rgba(51, 41, 31, 0.1);
+  font-size: 32px;
+  color: rgba(51, 41, 31, 0.08);
   line-height: 1;
 }
 .reference-quote-mark {
@@ -699,20 +682,37 @@
   color: var(--ink-soft);
 }
 @media (max-width: 760px) {
-  .references-dots-rail {
+  .references-pin-wrap {
+    height: auto !important;
+  }
+  .references-pin-inner {
+    position: static;
+    overflow: visible;
+  }
+  .references-track-h {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 2px;
+    padding: 4px 2px 18px;
+  }
+  .references-track-h::-webkit-scrollbar {
+    height: 6px;
+  }
+  .references-track-h::-webkit-scrollbar-thumb {
+    background: rgba(51, 41, 31, 0.15);
+    border-radius: 6px;
+  }
+  .references-dots-h {
     display: none;
   }
-  .reference-stack-item {
-    height: max(72vh, 560px);
-  }
-  .reference-stack-item:last-child {
-    height: max(50vh, 420px);
-  }
   .reference-card {
+    width: 86vw;
     padding: 28px 24px;
+    scroll-snap-align: start;
   }
   .reference-stack-index {
-    font-size: 36px;
+    font-size: 28px;
     top: 16px;
     right: 20px;
   }
