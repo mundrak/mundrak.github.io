@@ -61,7 +61,7 @@ export default function References() {
     const track = trackRef.current;
     let pinned = false;
     let distance = 0;
-    let navH = 0;
+    let pinTop = 0;
     let frame = null;
 
     const setActive = (active) => {
@@ -72,14 +72,13 @@ export default function References() {
       frame = null;
       if (!pinned) return;
       const range = Math.max(wrap.offsetHeight - inner.offsetHeight, 1);
-      const progress = Math.min(Math.max((navH - wrap.getBoundingClientRect().top) / range, 0), 1);
+      const progress = Math.min(Math.max((pinTop - wrap.getBoundingClientRect().top) / range, 0), 1);
       track.style.transform = `translateX(${-progress * distance}px)`;
       setActive(Math.round(progress * (TESTIMONIALS.length - 1)));
     };
 
     const measure = () => {
-      navH = document.querySelector('.nav')?.offsetHeight || 0;
-      section.style.setProperty('--nav-h', `${navH}px`);
+      const navH = document.querySelector('.nav')?.offsetHeight || 0;
       section.classList.remove('is-pinned');
       wrap.style.height = '';
       track.style.transform = '';
@@ -87,6 +86,8 @@ export default function References() {
       // Only pin when the whole section fits on screen; otherwise fall back to swiping.
       pinned = inner.scrollHeight <= window.innerHeight - navH;
       if (pinned) {
+        pinTop = navH + Math.max((window.innerHeight - navH - inner.offsetHeight) / 2, 0);
+        section.style.setProperty('--pin-top', `${pinTop}px`);
         section.classList.add('is-pinned');
         distance = Math.max(track.scrollWidth - viewport.clientWidth, 0);
         wrap.style.height = `${inner.offsetHeight + distance}px`;
