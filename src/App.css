@@ -593,6 +593,7 @@
 }
 .references-track-h {
   display: flex;
+  align-items: flex-start;
   gap: 24px;
   will-change: transform;
 }
@@ -655,8 +656,7 @@
   transform: rotate(-1deg);
 }
 .reference-attribution {
-  margin-top: auto;
-  padding-top: 24px;
+  margin-top: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
