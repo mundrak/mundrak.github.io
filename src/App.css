@@ -581,11 +581,29 @@
   padding: 80px 40px 30px;
   scroll-margin-top: 80px;
 }
-.references-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
+.references-carousel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin-top: 36px;
+}
+.references-track {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+  padding: 4px 2px 18px;
+  flex: 1;
+  min-width: 0;
+  scrollbar-width: thin;
+}
+.references-track::-webkit-scrollbar {
+  height: 6px;
+}
+.references-track::-webkit-scrollbar-thumb {
+  background: rgba(51, 41, 31, 0.15);
+  border-radius: 6px;
 }
 .reference-card {
   background: #fff;
@@ -594,6 +612,30 @@
   box-shadow: 0 4px 18px rgba(51, 41, 31, 0.07);
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
+  width: min(420px, 82vw);
+  scroll-snap-align: start;
+}
+.references-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(51, 41, 31, 0.12);
+  font-size: 18px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.references-arrow:hover {
+  background: var(--orange);
+  color: #fff;
+  transform: scale(1.06);
 }
 .reference-quote-mark {
   font-size: 34px;
@@ -642,8 +684,12 @@
   color: var(--cream-faint);
 }
 @media (max-width: 760px) {
-  .references-grid {
-    grid-template-columns: 1fr;
+  .references-arrow {
+    display: none;
+  }
+  .reference-card {
+    width: 86vw;
+    padding: 26px 24px;
   }
 }
 

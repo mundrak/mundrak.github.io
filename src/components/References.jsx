@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 const SHOW_MASALA = true;
 
 const TESTIMONIALS = [
@@ -8,7 +10,6 @@ const TESTIMONIALS = [
     color: 'pill-butter',
     name: 'Rohit Nambiar',
     role: 'Co-Founder & CEO, SabaiHealth',
-    rotate: 0.5,
   },
   {
     quote:
@@ -17,7 +18,6 @@ const TESTIMONIALS = [
     color: 'pill-sage',
     name: 'Divyansh Meena',
     role: 'Manager (Sankalp) at Intellecap',
-    rotate: -0.4,
   },
   {
     quote:
@@ -26,7 +26,6 @@ const TESTIMONIALS = [
     color: 'pill-sage',
     name: 'Ashish Shekhawat',
     role: 'Head of AI Products, CheQ',
-    rotate: 0.6,
   },
   {
     quote:
@@ -35,7 +34,6 @@ const TESTIMONIALS = [
     color: 'pill-peach',
     name: 'Stuart Fenwick',
     role: 'Speakeasy, University of Edinburgh Business School',
-    rotate: -0.6,
   },
   {
     quote:
@@ -44,11 +42,20 @@ const TESTIMONIALS = [
     color: 'pill-butter',
     name: 'Jo McLaren',
     role: 'Speakeasy, University of Edinburgh Business School',
-    rotate: 0.5,
   },
 ];
 
 export default function References() {
+  const trackRef = useRef(null);
+
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector('.reference-card');
+    const amount = card ? card.offsetWidth + 22 : 340;
+    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  };
+
   return (
     <div id="references" className="references-section">
       <div className="kicker">03 · The receipts</div>
@@ -58,24 +65,38 @@ export default function References() {
           <div className="work-scribble">bosses ke words, promise</div>
         )}
       </div>
-      <div className="references-grid">
-        {TESTIMONIALS.map((t) => (
-          <div
-            className="reference-card"
-            key={t.name}
-            style={{ transform: `rotate(${t.rotate}deg)` }}
-          >
-            <div className="reference-quote-mark">&ldquo;</div>
-            <p className="reference-quote">{t.quote}</p>
-            <div className="reference-attribution">
-              <div className={`reference-avatar ${t.color}`}>{t.initials}</div>
-              <div>
-                <div className="reference-name">{t.name}</div>
-                <div className="reference-role">{t.role}</div>
+      <div className="references-carousel">
+        <button
+          type="button"
+          className="references-arrow references-arrow-prev"
+          aria-label="Previous testimonial"
+          onClick={() => scrollByCard(-1)}
+        >
+          ←
+        </button>
+        <div className="references-track" ref={trackRef}>
+          {TESTIMONIALS.map((t) => (
+            <div className="reference-card" key={t.name}>
+              <div className="reference-quote-mark">&ldquo;</div>
+              <p className="reference-quote">{t.quote}</p>
+              <div className="reference-attribution">
+                <div className={`reference-avatar ${t.color}`}>{t.initials}</div>
+                <div>
+                  <div className="reference-name">{t.name}</div>
+                  <div className="reference-role">{t.role}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <button
+          type="button"
+          className="references-arrow references-arrow-next"
+          aria-label="Next testimonial"
+          onClick={() => scrollByCard(1)}
+        >
+          →
+        </button>
       </div>
     </div>
   );
