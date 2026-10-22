@@ -581,104 +581,73 @@
   padding: 80px 40px 30px;
   scroll-margin-top: 80px;
 }
-.references-carousel {
+.references-section.is-pinned {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.references-section.is-pinned .references-pin-wrap {
+  position: relative;
+}
+.references-section.is-pinned .references-pin-inner {
+  position: sticky;
+  top: var(--nav-h, 72px);
+  height: calc(100vh - var(--nav-h, 72px));
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  flex-direction: column;
+  justify-content: center;
+}
+.references-viewport {
   margin-top: 36px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 4px 2px 18px;
+}
+.references-viewport::-webkit-scrollbar {
+  display: none;
+}
+.references-section.is-pinned .references-viewport {
+  overflow: hidden;
+  scroll-snap-type: none;
 }
 .references-track-h {
   display: flex;
-  align-items: flex-start;
   gap: 24px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 2px;
-  padding: 4px 2px 18px;
-  flex: 1;
-  min-width: 0;
-  scrollbar-width: thin;
-}
-.references-track-h::-webkit-scrollbar {
-  height: 6px;
-}
-.references-track-h::-webkit-scrollbar-thumb {
-  background: rgba(51, 41, 31, 0.15);
-  border-radius: 6px;
-}
-.references-arrow {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: #fff;
-  box-shadow: 0 4px 14px rgba(51, 41, 31, 0.12);
-  font-size: 18px;
-  color: var(--ink);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease, background 0.15s ease;
-  margin-top: 4px;
-}
-.references-arrow:hover {
-  background: var(--orange);
-  color: #fff;
-  transform: scale(1.06);
+  will-change: transform;
 }
 .reference-card {
-  position: relative;
   background: #fff;
-  border-radius: 28px;
-  padding: 36px 40px;
-  box-shadow: 0 10px 30px rgba(51, 41, 31, 0.08);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 4px 18px rgba(51, 41, 31, 0.07);
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-  width: min(420px, 80vw);
+  width: min(400px, 80vw);
   scroll-snap-align: start;
 }
-.reference-stack-index {
-  position: absolute;
-  top: 20px;
-  right: 28px;
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 32px;
-  color: rgba(51, 41, 31, 0.08);
-  line-height: 1;
-}
 .reference-quote-mark {
-  font-size: 40px;
+  font-size: 34px;
   line-height: 1;
   color: var(--orange);
   font-family: Georgia, serif;
 }
 .reference-quote {
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--ink);
-  margin: 8px 0 0;
-  max-width: 92%;
-}
-.reference-quote-pending {
-  font-family: 'Caveat', cursive;
-  font-size: 26px;
-  line-height: 1.4;
-  color: var(--gold);
   margin: 6px 0 0;
-  transform: rotate(-1deg);
 }
 .reference-attribution {
-  margin-top: 24px;
+  margin-top: auto;
+  padding-top: 20px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 .reference-avatar {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
   border-radius: 50%;
   display: flex;
@@ -686,7 +655,6 @@
   justify-content: center;
   font-weight: 700;
   font-size: 16px;
-  background: #fff;
 }
 .reference-name {
   font-weight: 700;
@@ -694,24 +662,32 @@
 }
 .reference-role {
   font-size: 13.5px;
-  color: var(--ink-soft);
+  color: var(--cream-faint);
+}
+.references-dots-h {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.references-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+  background: var(--border);
+  transition: width 0.25s ease, background 0.25s ease;
+}
+.references-dot.is-active {
+  background: var(--orange);
+  width: 22px;
 }
 @media (max-width: 760px) {
-  .references-arrow {
-    display: none;
-  }
   .reference-card {
-    width: 86vw;
-    padding: 28px 24px;
-  }
-  .reference-stack-index {
-    font-size: 28px;
-    top: 16px;
-    right: 20px;
+    width: 82vw;
+    padding: 26px 24px;
   }
   .reference-quote {
-    font-size: 17px;
-    max-width: 100%;
+    font-size: 16px;
   }
 }
 
