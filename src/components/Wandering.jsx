@@ -81,13 +81,7 @@ export default function Wandering() {
       <SectionHead
         num="05"
         label="The wandering"
-        title={
-          <>
-            Lived in some cities. Wandered many more.
-            <br />
-            One growing list of cheap eats.
-          </>
-        }
+        title="Lived in some cities. Wandered many more."
       />
 
       <div className="trail" ref={trailRef}>
