@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import SectionHead from './SectionHead';
+import useReveal from './useReveal';
 
 const SHOW_MASALA = true;
 
@@ -48,6 +50,7 @@ const TESTIMONIALS = [
 export default function References() {
   const viewportRef = useRef(null);
   const [active, setActive] = useState(0);
+  const trackRef = useReveal(0.2);
   const drag = useRef({ down: false, startX: 0, startLeft: 0, moved: false });
 
   const step = () => {
@@ -90,11 +93,12 @@ export default function References() {
 
   return (
     <div id="references" className="references-section">
-      <div className="kicker">03 · The receipts</div>
-      <div className="work-header">
-        <h2 className="section-title">Don't take my word for it.</h2>
-        {SHOW_MASALA && <div className="work-scribble">bosses ke words, promise</div>}
-      </div>
+      <SectionHead
+        num="03"
+        label="The receipts"
+        title="Don't take my word for it."
+        scribble={SHOW_MASALA && 'bosses ke words, promise'}
+      />
       <div
         className="references-viewport"
         ref={viewportRef}
@@ -103,9 +107,9 @@ export default function References() {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
       >
-        <div className="references-track-h">
+        <div className="references-track-h" ref={trackRef}>
           {TESTIMONIALS.map((t, i) => (
-            <div className="receipt-wrap" key={t.name}>
+            <div className="receipt-wrap" key={t.name} style={{ '--i': i }}>
               <div className="receipt">
                 <div className="receipt-head">
                   <span>Coffee par Charcha</span>

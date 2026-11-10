@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead';
 import { useEffect, useRef } from 'react';
 import useReveal from './useReveal';
 
@@ -42,7 +43,7 @@ const JOBS = [
 function Stop({ job, index }) {
   const ref = useReveal(0.3);
   return (
-    <div className="route-stop" ref={ref}>
+    <div className="route-stop" ref={ref} style={{ '--tilt-t': `${index % 2 ? 0.5 : -0.5}deg` }}>
       <div className="route-stamp" style={{ '--tilt': `${index % 2 ? 7 : -8}deg` }}>
         <span>{job.stamp}</span>
       </div>
@@ -113,17 +114,18 @@ function Route() {
 export default function Work() {
   return (
     <div id="work" className="work-section">
-      <div className="kicker">02 · The work</div>
-      <div className="work-header">
-        <h2 className="section-title">
-          Strategy AND execution.
-          <br />
-          Always both.
-        </h2>
-        {SHOW_MASALA && (
-          <div className="work-scribble">jeevan = brand building, basically</div>
-        )}
-      </div>
+      <SectionHead
+        num="02"
+        label="The work"
+        title={
+          <>
+            Strategy AND execution.
+            <br />
+            Always both.
+          </>
+        }
+        scribble={SHOW_MASALA && 'jeevan = brand building, basically'}
+      />
       <p className="work-intro">
         Four stops, one pattern: walk into something messy, figure out what needs to
         change, build the thing that works. The formal version lives in my{' '}
@@ -136,6 +138,7 @@ export default function Work() {
       <Route />
 
       <div className="pikachu-card" id="pikachu-story">
+        <span className="tape" aria-hidden="true" />
         <div>
           <div className="pikachu-title">
             <span className="only-pointer">Noticed the Pikachu chasing your cursor? ⚡</span>

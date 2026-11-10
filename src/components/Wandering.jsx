@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead';
 import { useRef } from 'react';
 import useReveal from './useReveal';
 import wFood from '../assets/photos/w-food.webp';
@@ -77,14 +78,17 @@ export default function Wandering() {
 
   return (
     <div id="wandering" className="wander-section">
-      <div className="kicker">05 · The wandering</div>
-      <div className="work-header">
-        <h2 className="wander-title">
-          Lived in some cities. Wandered many more.
-          <br />
-          One growing list of cheap eats.
-        </h2>
-      </div>
+      <SectionHead
+        num="05"
+        label="The wandering"
+        title={
+          <>
+            Lived in some cities. Wandered many more.
+            <br />
+            One growing list of cheap eats.
+          </>
+        }
+      />
 
       <div className="trail" ref={trailRef}>
         <div className="wander-label">lived</div>

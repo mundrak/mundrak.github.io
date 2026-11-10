@@ -2001,6 +2001,277 @@
   }
 }
 
+/* =====================================================================
+   ONE SYSTEM
+   Everything on the page is a piece of paper on the same café table:
+   one paper colour, one shadow, one corner, one label face, one stamp,
+   one dashed thread, and one way of arriving (rise and settle).
+   ===================================================================== */
+:root {
+  --paper: #fffdf8;
+  --shadow-paper: 0 6px 16px rgba(51, 41, 31, 0.12);
+  --shadow-lift: 0 16px 32px rgba(51, 41, 31, 0.2);
+  --ease-settle: cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  --dur-settle: 0.65s;
+  --mono: 'Space Mono', ui-monospace, 'Courier New', monospace;
+}
+body {
+  background-image: radial-gradient(rgba(51, 41, 31, 0.07) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+}
+
+/* labels: one printed face everywhere */
+.kicker,
+.wander-label {
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+/* section head: thread -> numbered stamp -> title */
+.sec-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.sec-thread {
+  position: absolute;
+  left: 22px;
+  bottom: calc(100% + 4px);
+  height: 60px;
+  border-left: 3px dashed var(--gold);
+  opacity: 0.7;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s ease;
+}
+.sec-head.is-in .sec-thread {
+  transform: scaleY(1);
+}
+.sec-stamp {
+  --tilt: -8deg;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px double var(--orange);
+  background: var(--cream);
+  color: var(--orange);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: rotate(var(--tilt)) scale(2.2);
+}
+.sec-head.is-in .sec-stamp {
+  animation: stampIn 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) 0.35s forwards;
+}
+.sec-head .section-title,
+.sec-head .section-lead,
+.sec-head .work-scribble,
+.sec-head .kicker {
+  opacity: 0;
+  transition: opacity 0.5s ease 0.45s, transform var(--dur-settle) var(--ease-settle) 0.45s;
+}
+.sec-head .section-title,
+.sec-head .section-lead {
+  transform: translateY(20px);
+}
+.sec-head.is-in .section-title,
+.sec-head.is-in .section-lead,
+.sec-head.is-in .work-scribble,
+.sec-head.is-in .kicker {
+  opacity: 1;
+}
+.sec-head.is-in .section-title,
+.sec-head.is-in .section-lead {
+  transform: none;
+}
+.sec-head .section-title {
+  margin-top: 16px;
+}
+.sec-head .section-lead {
+  max-width: 640px;
+}
+
+/* tape: the same strip wherever paper is stuck down */
+.tape {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  width: 92px;
+  height: 26px;
+  margin-left: -46px;
+  background: rgba(255, 217, 142, 0.78);
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(51, 41, 31, 0.1);
+  z-index: 1;
+}
+
+/* hero photo: a taped print, like the polaroids further down */
+.hero-photo-frame {
+  background: var(--paper);
+  padding: 12px;
+  border-radius: 4px;
+  overflow: visible;
+  box-shadow: var(--shadow-paper);
+  position: relative;
+}
+
+/* tickets */
+.ticket {
+  background: var(--paper);
+  border-radius: 6px;
+  filter: drop-shadow(0 6px 12px rgba(51, 41, 31, 0.12));
+}
+.ticket-stub {
+  border-radius: 0 6px 6px 0;
+}
+.route-stop .ticket-main,
+.route-stop .ticket-stub {
+  opacity: 1;
+  transform: none;
+  transition: transform 0.25s ease;
+}
+.route-stop .ticket {
+  opacity: 0;
+  transform: translateY(28px) rotate(calc(var(--tilt-t, 0deg) + 2deg));
+  transition: opacity 0.5s ease 0.15s, transform var(--dur-settle) var(--ease-settle) 0.15s;
+}
+.route-stop.is-in .ticket {
+  opacity: 1;
+  transform: rotate(var(--tilt-t, 0deg));
+}
+@media (hover: hover) {
+  .route-stop.is-in .ticket:hover {
+    transform: rotate(0deg) translateY(-6px);
+    transition-delay: 0s;
+  }
+}
+@media (max-width: 860px) {
+  .ticket-stub {
+    border-radius: 0 0 6px 6px;
+  }
+}
+
+/* sticky note */
+.pikachu-card {
+  position: relative;
+  border-radius: 6px;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-0.5deg);
+  margin-top: 44px;
+}
+
+/* receipts */
+.receipt {
+  background: var(--paper);
+}
+.receipt-wrap {
+  filter: drop-shadow(0 6px 12px rgba(51, 41, 31, 0.12));
+}
+.receipt-wrap:nth-child(odd) {
+  --tilt: -1.2deg;
+}
+.receipt-wrap:nth-child(even) {
+  --tilt: 1deg;
+  margin-top: 8px;
+}
+.references-track-h .receipt-wrap {
+  opacity: 0;
+  transform: translateY(28px) rotate(calc(var(--tilt) + 2deg));
+  transition: opacity 0.5s ease, transform var(--dur-settle) var(--ease-settle);
+  transition-delay: calc(min(var(--i), 4) * 0.09s);
+}
+.references-track-h.is-in .receipt-wrap {
+  opacity: 1;
+  transform: rotate(var(--tilt));
+}
+@media (hover: hover) {
+  .references-track-h.is-in .receipt-wrap:hover {
+    transform: rotate(0deg) translateY(-6px);
+    transition-delay: 0s;
+  }
+}
+
+/* the paper: same table, same paper, same display face */
+.writing-section {
+  background: transparent;
+  color: var(--ink);
+  margin-top: 0;
+  overflow: visible;
+}
+.writing-inner {
+  padding: 80px 40px 30px;
+}
+.paper {
+  background: var(--paper);
+  box-shadow: var(--shadow-paper);
+  margin-top: 36px;
+  transform: translateY(28px) rotate(1.5deg);
+  transition: opacity 0.5s ease, transform var(--dur-settle) var(--ease-settle);
+}
+.paper.is-in {
+  transform: rotate(-0.5deg);
+}
+.paper-name,
+.paper-headline,
+.paper-story.is-lead .paper-headline,
+.paper-longread-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+}
+.paper-name {
+  font-size: clamp(30px, 5.4vw, 60px);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.paper-story.is-lead .paper-headline {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.05;
+}
+.paper-headline {
+  font-size: 22px;
+}
+.paper-story.is-small .paper-headline {
+  font-size: 18px;
+}
+.paper-longread-title {
+  font-size: 18px;
+}
+
+/* polaroids */
+.polaroid {
+  background: var(--paper);
+  box-shadow: var(--shadow-paper);
+  transform: translateY(28px) rotate(calc(var(--tilt) + 2deg));
+  transition: opacity 0.5s ease, transform var(--dur-settle) var(--ease-settle), box-shadow 0.25s ease;
+  transition-delay: calc(min(var(--i), 5) * 0.09s);
+}
+.polaroid-tape {
+  background: rgba(255, 217, 142, 0.78);
+}
+@media (hover: hover) {
+  .rail-wrap.is-in .polaroid:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@media (max-width: 860px) {
+  .writing-inner {
+    padding: 60px 20px 30px;
+  }
+}
+@media (max-width: 640px) {
+  .hero-photo-frame {
+    padding: 10px;
+  }
+}
+
 /* ---------- generic ---------- */
 @media (max-width: 500px) {
   .hero,

@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead';
 import useReveal from './useReveal';
 
 const LEAD = {
@@ -47,17 +48,12 @@ export default function Writing() {
   return (
     <div id="writing" className="writing-section">
       <div className="writing-inner">
-        <div className="writing-top">
-          <div>
-            <div className="kicker writing-kicker">04 · The writing</div>
-            <h2 className="writing-title">Learn. De‑learn. Repeat.</h2>
-          </div>
-          <p className="writing-lead">
-            The main event. I write the way I talk — honest, informed, a
-            little outspoken — about marketing, consistency, and starting
-            from scratch.
-          </p>
-        </div>
+        <SectionHead
+          num="04"
+          label="The writing"
+          title="Learn. De‑learn. Repeat."
+          lead="The main event. I write the way I talk — honest, informed, a little outspoken — about marketing, consistency, and starting from scratch."
+        />
 
         <div className="paper" ref={paperRef}>
           <div className="paper-masthead">

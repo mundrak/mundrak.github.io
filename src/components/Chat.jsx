@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead';
 import { useEffect, useRef, useState } from 'react';
 
 const GREETING = 'Areee, hi! Pick a question, I’ll do the talking. ☕';
@@ -88,12 +89,12 @@ export default function Chat() {
     <div id="chat" className="chat-section" ref={sectionRef}>
       <div className="chat-grid">
         <div className="chat-sticky">
-          <div className="kicker">01 · The chat</div>
-          <h2 className="section-title">The conversation, basically</h2>
-          <p className="section-lead">
-            Everything a first coffee with me covers, minus the part where I
-            finish your plate before you do.
-          </p>
+          <SectionHead
+            num="01"
+            label="The chat"
+            title="The conversation, basically"
+            lead="Everything a first coffee with me covers, minus the part where I finish your plate before you do."
+          />
           <div className="chat-cup">
             <svg
               viewBox="0 0 80 80"
