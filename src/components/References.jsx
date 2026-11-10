@@ -17,7 +17,7 @@ const TESTIMONIALS = [
     initials: 'DM',
     color: 'sage',
     name: 'Divyansh Meena',
-    role: 'Manager (Sankalp) at Intellecap',
+    role: 'My manager at LVX · now Manager (Sankalp), Intellecap',
   },
   {
     quote:
@@ -25,7 +25,7 @@ const TESTIMONIALS = [
     initials: 'AS',
     color: 'butter',
     name: 'Ashish Shekhawat',
-    role: 'Head of AI Products, CheQ',
+    role: 'My first internship, 2020 · now Head of AI Products, CheQ',
   },
   {
     quote:

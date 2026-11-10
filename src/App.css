@@ -457,6 +457,30 @@
     margin-top: 14px;
   }
 }
+.work-intro {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 18px 0 0;
+}
+.work-receipt {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(51, 41, 31, 0.15);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.work-receipt-label {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
 .work-bullets {
   display: flex;
   flex-direction: column;
