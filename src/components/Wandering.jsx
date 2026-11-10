@@ -1,4 +1,5 @@
-import { Fragment, useRef } from 'react';
+import { useRef } from 'react';
+import useReveal from './useReveal';
 import wFood from '../assets/photos/w-food.webp';
 import wCity from '../assets/photos/w-city.webp';
 import wFriends from '../assets/photos/w-friends.webp';
@@ -45,10 +46,34 @@ const PHOTOS = [
 
 export default function Wandering() {
   const railRef = useRef(null);
+  const trailRef = useReveal(0.4);
+  const tagsRef = useReveal(0.4);
+  const wallRef = useReveal(0.15);
+  const drag = useRef({ down: false, startX: 0, startLeft: 0, moved: false });
 
   function scrollRail(dir) {
     railRef.current?.scrollBy({ left: dir * 600, behavior: 'smooth' });
   }
+
+  // Mouse drag-to-scroll; touch devices already swipe natively.
+  const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse') return;
+    drag.current = { down: true, startX: e.clientX, startLeft: railRef.current.scrollLeft, moved: false };
+  };
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d.down) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 4 && !d.moved) {
+      d.moved = true;
+      railRef.current.classList.add('is-dragging');
+    }
+    if (d.moved) railRef.current.scrollLeft = d.startLeft - dx;
+  };
+  const endDrag = () => {
+    drag.current.down = false;
+    railRef.current?.classList.remove('is-dragging');
+  };
 
   return (
     <div id="wandering" className="wander-section">
@@ -61,62 +86,70 @@ export default function Wandering() {
         </h2>
       </div>
 
-      <div className="wander-row">
-        <span className="wander-label">lived —</span>
-        {LIVED.map((city, i) => (
-          <Fragment key={city}>
-            <span className="pill-outline">{city}</span>
-            {i < LIVED.length - 1 && <span className="wander-arrow">→</span>}
-          </Fragment>
-        ))}
+      <div className="trail" ref={trailRef}>
+        <div className="wander-label">lived</div>
+        <div className="trail-track">
+          <div className="trail-line" aria-hidden="true" />
+          {LIVED.map((city, i) => {
+            const [name, note] = city.split(' — ');
+            return (
+              <div className="trail-stop" key={city} style={{ '--i': i }}>
+                <span className={`trail-pin${i === LIVED.length - 1 ? ' is-now' : ''}`} />
+                <span className="trail-name">{name}</span>
+                <span className="trail-note">{i === LIVED.length - 1 ? 'now' : note || '\u00a0'}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="wander-row wandered">
-        <span className="wander-label">wandered —</span>
-        {WANDERED.map((city) => (
-          <span key={city.label} className={`pill-small ${city.color}`}>
-            {city.label}
-          </span>
-        ))}
-        {SHOW_MASALA && (
-          <span className="wander-scribble">The list is not done yet</span>
-        )}
-      </div>
-
-      <div className="rail-wrap">
-        <div className="rail" ref={railRef}>
-          {PHOTOS.map((p, i) => (
-            <div
-              className="rail-item"
-              key={i}
-              style={{ transform: `rotate(${p.rotate}deg)` }}
+      <div className="tags" ref={tagsRef}>
+        <div className="wander-label">wandered</div>
+        <div className="tags-row">
+          {WANDERED.map((city, i) => (
+            <span
+              key={city.label}
+              className={`luggage-tag ${city.color}`}
+              style={{ '--i': i, '--tilt': `${[-4, 3, -2, 5, -3, 2, -5][i % 7]}deg` }}
             >
+              {city.label}
+            </span>
+          ))}
+          {SHOW_MASALA && <span className="wander-scribble">The list is not done yet</span>}
+        </div>
+      </div>
+
+      <div className="rail-wrap" ref={wallRef}>
+        <div
+          className="rail"
+          ref={railRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+        >
+          {PHOTOS.map((p, i) => (
+            <figure className="polaroid" key={i} style={{ '--tilt': `${p.rotate * 1.6}deg`, '--i': i }}>
+              <span className="polaroid-tape" aria-hidden="true" />
               <img
-                className="rail-photo"
+                className="polaroid-photo"
                 src={p.src}
                 alt={p.caption}
+                draggable="false"
                 style={{ objectPosition: p.objectPosition }}
               />
-              <div className="rail-caption">{p.caption}</div>
-            </div>
+              <figcaption className="polaroid-caption">{p.caption}</figcaption>
+            </figure>
           ))}
         </div>
-        <button
-          className="rail-btn left"
-          aria-label="Scroll left"
-          onClick={() => scrollRail(-1)}
-        >
+        <button className="rail-btn left" aria-label="Scroll left" onClick={() => scrollRail(-1)}>
           ←
         </button>
-        <button
-          className="rail-btn right"
-          aria-label="Scroll right"
-          onClick={() => scrollRail(1)}
-        >
+        <button className="rail-btn right" aria-label="Scroll right" onClick={() => scrollRail(1)}>
           →
         </button>
       </div>
-      <div className="rail-footnote">scroll for the full photo dump →</div>
+      <div className="rail-footnote">drag for the full photo dump →</div>
     </div>
   );
 }
