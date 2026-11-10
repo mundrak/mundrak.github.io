@@ -11,6 +11,12 @@ import wStockholm from '../assets/photos/w-stockholm.webp';
 import wPrague from '../assets/photos/w-prague.webp';
 import wBudapest from '../assets/photos/w-budapest.webp';
 import wLondon from '../assets/photos/w-london.webp';
+import fCoffee from '../assets/photos/f-coffee.webp';
+import fColdCoffee from '../assets/photos/f-coldcoffee.webp';
+import fCupcake from '../assets/photos/f-cupcake.webp';
+import fTapas from '../assets/photos/f-tapas.webp';
+import fIceCream from '../assets/photos/f-icecream.webp';
+import fNaan from '../assets/photos/f-naan.webp';
 
 const SHOW_MASALA = true;
 
@@ -33,11 +39,17 @@ const WANDERED = [
 ];
 
 const PHOTOS = [
+  { src: fCoffee, rotate: 1.5, objectPosition: '50% 50%', caption: 'First sip, best sip ☕' },
   { src: wFood, rotate: -2, objectPosition: '50% 62.1%', caption: "At my Graduation Ceremony in Nov'24" },
+  { src: fTapas, rotate: -1.5, objectPosition: '50% 50%', caption: 'Indian tapas at Mother India Cafe' },
   { src: wCity, rotate: 1.5, objectPosition: '50% 50%', caption: "MSc Welcome Week in Sept'23" },
+  { src: fCupcake, rotate: 2, objectPosition: '50% 50%', caption: 'Red velvet, under inspection' },
   { src: wFriends, rotate: -1, objectPosition: '50% 50%', caption: 'Giving an example speech at Speakeasy' },
+  { src: fIceCream, rotate: -2, objectPosition: '50% 50%', caption: "Ice cream on St Mary's Street, Edinburgh" },
   { src: wCoffee, rotate: 2, objectPosition: '50% 50%', caption: 'Giving my final presentation for the Edinburgh Award by the Reslife team' },
+  { src: fColdCoffee, rotate: 1, objectPosition: '50% 50%', caption: 'Cold coffee and gossip' },
   { src: wDublin, rotate: -1.5, objectPosition: '50% 50%', caption: 'At Global Alumni Day in May at the Business School' },
+  { src: fNaan, rotate: -1, objectPosition: '50% 50%', caption: 'Naan the size of the table' },
   { src: wVienna, rotate: 1, objectPosition: '50% 50%', caption: 'UEBS Alumni Meet in Dublin' },
   { src: wStockholm, rotate: -1, objectPosition: '50% 50%', caption: 'A visit to the Natwest office organised by UEBS' },
   { src: wPrague, rotate: 2, objectPosition: '50% 50%', caption: 'At the Business Innovation Summit by the Economist in March 2024, London' },
