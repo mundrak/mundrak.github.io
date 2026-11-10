@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SHOW_MASALA = true;
 
@@ -46,113 +46,106 @@ const TESTIMONIALS = [
 ];
 
 export default function References() {
-  const sectionRef = useRef(null);
-  const wrapRef = useRef(null);
-  const innerRef = useRef(null);
   const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const dotRefs = useRef([]);
+  const [active, setActive] = useState(0);
+  const drag = useRef({ down: false, startX: 0, startLeft: 0, moved: false });
+
+  const step = () => {
+    const card = viewportRef.current?.querySelector('.receipt-wrap');
+    return card ? card.offsetWidth + 28 : 1;
+  };
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const wrap = wrapRef.current;
-    const inner = innerRef.current;
     const viewport = viewportRef.current;
-    const track = trackRef.current;
-    let pinned = false;
-    let distance = 0;
-    let pinTop = 0;
-    let frame = null;
-
-    const setActive = (active) => {
-      dotRefs.current.forEach((dot, i) => dot && dot.classList.toggle('is-active', i === active));
-    };
-
-    const update = () => {
-      frame = null;
-      if (!pinned) return;
-      const range = Math.max(wrap.offsetHeight - inner.offsetHeight, 1);
-      const progress = Math.min(Math.max((pinTop - wrap.getBoundingClientRect().top) / range, 0), 1);
-      track.style.transform = `translateX(${-progress * distance}px)`;
-      setActive(Math.round(progress * (TESTIMONIALS.length - 1)));
-    };
-
-    const measure = () => {
-      const navH = document.querySelector('.nav')?.offsetHeight || 0;
-      section.classList.remove('is-pinned');
-      wrap.style.height = '';
-      track.style.transform = '';
-
-      // Only pin when the whole section fits on screen; otherwise fall back to swiping.
-      pinned = inner.scrollHeight <= window.innerHeight - navH;
-      if (pinned) {
-        pinTop = navH + Math.max((window.innerHeight - navH - inner.offsetHeight) / 2, 0);
-        section.style.setProperty('--pin-top', `${pinTop}px`);
-        section.classList.add('is-pinned');
-        distance = Math.max(track.scrollWidth - viewport.clientWidth, 0);
-        wrap.style.height = `${inner.offsetHeight + distance}px`;
-        update();
-      }
-    };
-
     const onScroll = () => {
-      if (frame === null) frame = requestAnimationFrame(update);
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      const atEnd = max > 0 && viewport.scrollLeft >= max - 4;
+      setActive(atEnd ? TESTIMONIALS.length - 1 : Math.round(viewport.scrollLeft / step()));
     };
-    const onNativeScroll = () => {
-      if (pinned) return;
-      const card = track.querySelector('.reference-card');
-      const step = card ? card.offsetWidth + 24 : 1;
-      setActive(Math.round(viewport.scrollLeft / step));
-    };
-
-    measure();
-    setActive(0);
-    document.fonts?.ready.then(measure);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', measure);
-    viewport.addEventListener('scroll', onNativeScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', measure);
-      viewport.removeEventListener('scroll', onNativeScroll);
-      if (frame !== null) cancelAnimationFrame(frame);
-    };
+    viewport.addEventListener('scroll', onScroll, { passive: true });
+    return () => viewport.removeEventListener('scroll', onScroll);
   }, []);
 
+  const go = (dir) => viewportRef.current?.scrollBy({ left: dir * step(), behavior: 'smooth' });
+
+  // Mouse drag-to-scroll; touch devices already swipe natively.
+  const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse') return;
+    drag.current = { down: true, startX: e.clientX, startLeft: viewportRef.current.scrollLeft, moved: false };
+  };
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d.down) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 4 && !d.moved) {
+      d.moved = true;
+      viewportRef.current.classList.add('is-dragging');
+    }
+    if (d.moved) viewportRef.current.scrollLeft = d.startLeft - dx;
+  };
+  const endDrag = () => {
+    drag.current.down = false;
+    viewportRef.current?.classList.remove('is-dragging');
+  };
+
   return (
-    <div id="references" className="references-section" ref={sectionRef}>
-      <div className="references-pin-wrap" ref={wrapRef}>
-        <div className="references-pin-inner" ref={innerRef}>
-          <div className="kicker">03 · The receipts</div>
-          <div className="work-header">
-            <h2 className="section-title">Don't take my word for it.</h2>
-            {SHOW_MASALA && (
-              <div className="work-scribble">bosses ke words, promise</div>
-            )}
-          </div>
-          <div className="references-viewport" ref={viewportRef}>
-            <div className="references-track-h" ref={trackRef}>
-              {TESTIMONIALS.map((t) => (
-                <div className="reference-card" key={t.name}>
-                  <div className="reference-quote-mark">&ldquo;</div>
-                  <p className="reference-quote">{t.quote}</p>
-                  <div className="reference-attribution">
-                    <div className={`reference-avatar pill-${t.color}`}>{t.initials}</div>
-                    <div>
-                      <div className="reference-name">{t.name}</div>
-                      <div className="reference-role">{t.role}</div>
-                    </div>
+    <div id="references" className="references-section">
+      <div className="kicker">03 · The receipts</div>
+      <div className="work-header">
+        <h2 className="section-title">Don't take my word for it.</h2>
+        {SHOW_MASALA && <div className="work-scribble">bosses ke words, promise</div>}
+      </div>
+      <div
+        className="references-viewport"
+        ref={viewportRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+      >
+        <div className="references-track-h">
+          {TESTIMONIALS.map((t, i) => (
+            <div className="receipt-wrap" key={t.name}>
+              <div className="receipt">
+                <div className="receipt-head">
+                  <span>Coffee par Charcha</span>
+                  <span>
+                    No. {String(i + 1).padStart(2, '0')}/{String(TESTIMONIALS.length).padStart(2, '0')}
+                  </span>
+                </div>
+                <div className="receipt-rule" />
+                <div className="receipt-from">
+                  <div className={`reference-avatar pill-${t.color}`}>{t.initials}</div>
+                  <div>
+                    <div className="receipt-label">billed by</div>
+                    <div className="reference-name">{t.name}</div>
+                    <div className="reference-role">{t.role}</div>
                   </div>
                 </div>
-              ))}
+                <div className="receipt-rule" />
+                <p className="reference-quote">&ldquo;{t.quote}&rdquo;</p>
+                <div className="receipt-foot">
+                  <div className="receipt-rule" />
+                  <div className="receipt-barcode" aria-hidden="true" />
+                  <div className="receipt-thanks">thank you · visit again</div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="references-dots-h" aria-hidden="true">
-            {TESTIMONIALS.map((t, i) => (
-              <span className="references-dot" key={t.name} ref={(el) => (dotRefs.current[i] = el)} />
-            ))}
-          </div>
+          ))}
         </div>
+      </div>
+      <div className="references-controls">
+        <button type="button" className="receipt-btn" onClick={() => go(-1)} aria-label="Previous receipt">
+          ←
+        </button>
+        <div className="references-dots-h" aria-hidden="true">
+          {TESTIMONIALS.map((t, i) => (
+            <span className={`references-dot${i === active ? ' is-active' : ''}`} key={t.name} />
+          ))}
+        </div>
+        <button type="button" className="receipt-btn" onClick={() => go(1)} aria-label="Next receipt">
+          →
+        </button>
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ export default function Work() {
             <div className="work-title">{job.title}</div>
             <p className="work-desc">{job.desc}</p>
             <div className="work-receipt">
-              <span className="work-receipt-label">receipt</span>
+              <span className="work-receipt-label">proof</span>
               <span>{job.receipt}</span>
             </div>
             {job.scribble && SHOW_MASALA && (
@@ -67,9 +67,12 @@ export default function Work() {
         ))}
       </div>
 
-      <div className="pikachu-card">
+      <div className="pikachu-card" id="pikachu-story">
         <div>
-          <div className="pikachu-title">Noticed the Pikachu chasing your cursor? ⚡</div>
+          <div className="pikachu-title">
+            <span className="only-pointer">Noticed the Pikachu chasing your cursor? ⚡</span>
+            <span className="only-touch">Noticed the Pikachu in the corner? ⚡</span>
+          </div>
           <p className="pikachu-desc">
             There's a story behind it. It's a good one. But you'll have to ask me yourself.
           </p>

@@ -1,5 +1,5 @@
 import './App.css';
-import CursorStyles from './components/CursorStyles';
+import PikachuBuddy from './components/PikachuBuddy';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import Chat from './components/Chat';
@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <>
-      <CursorStyles />
+      <PikachuBuddy />
       <Nav />
       <Hero />
       <Chat />
