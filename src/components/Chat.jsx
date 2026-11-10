@@ -1,42 +1,100 @@
-const BUBBLES = [
-  { side: 'left', delay: 0.1, text: "So… you're an engineer or a marketer?" },
+import SectionHead from './SectionHead';
+import { useEffect, useRef, useState } from 'react';
+
+const GREETING = 'Areee, hi! Pick a question, I’ll do the talking. ☕';
+
+const QUESTIONS = [
   {
-    side: 'right',
-    delay: 0.35,
-    text: 'Yes. Engineering taught me how things work; marketing taught me why people care. I use both, daily.',
+    id: 'engineer',
+    q: "So… you're an engineer or a marketer?",
+    a: 'Yes. Engineering taught me how things work; marketing taught me why people care. I use both, daily.',
   },
-  { side: 'left', delay: 0.6, text: 'How did that switch even happen?' },
   {
-    side: 'right',
-    delay: 0.85,
-    text: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me feel. Been chasing that feeling from Chennai to Mumbai to Edinburgh to Bengaluru.',
+    id: 'switch',
+    q: 'How did that switch even happen?',
+    a: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me feel. Been chasing that feeling from Chennai to Mumbai to Edinburgh to Bengaluru.',
   },
-  { side: 'left', delay: 1.1, text: "And when you're not working?" },
   {
-    side: 'right',
-    delay: 1.35,
-    text: "Eating my way through a new city, third coffee in hand, reading the news like it's gossip. Then writing about all of it.",
+    id: 'offwork',
+    q: "And when you're not working?",
+    a: "Eating my way through a new city, third coffee in hand, reading the news like it's gossip. Then writing about all of it.",
   },
-  { side: 'left', delay: 1.6, text: 'One thing you believe in?' },
   {
-    side: 'right',
-    delay: 1.85,
+    id: 'pikachu',
+    q: "What's with the Pikachu?",
+    a: "There's a story. It's a good one. But that one I only tell over coffee, so you'll have to book one. ⚡",
+  },
+  {
+    id: 'belief',
+    q: 'One thing you believe in?',
+    a: "Zindagi mein haara wohi, jo lada nahi. You only lose if you don't fight. 🥊",
     final: true,
-    text: 'Zindagi mein haara wohi, jo lada nahi. You only lose if you don\'t fight. 🥊',
   },
 ];
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 export default function Chat() {
+  const [messages, setMessages] = useState([]);
+  const [asked, setAsked] = useState([]);
+  const [typing, setTyping] = useState(false);
+  const [started, setStarted] = useState(false);
+  const sectionRef = useRef(null);
+  const timers = useRef([]);
+
+  const later = (fn, ms) => {
+    timers.current.push(setTimeout(fn, prefersReducedMotion() ? 0 : ms));
+  };
+
+  // Say hello only once the visitor actually reaches the chat.
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node || started) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        setStarted(true);
+        setTyping(true);
+        later(() => {
+          setTyping(false);
+          setMessages([{ side: 'right', text: GREETING }]);
+        }, 900);
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [started]);
+
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  const ask = (item) => {
+    if (typing || asked.includes(item.id)) return;
+    setAsked((prev) => [...prev, item.id]);
+    setMessages((prev) => [...prev, { side: 'left', text: item.q }]);
+    later(() => setTyping(true), 250);
+    later(() => {
+      setTyping(false);
+      setMessages((prev) => [...prev, { side: 'right', text: item.a, final: item.final }]);
+    }, 500 + Math.min(item.a.length * 9, 1300));
+  };
+
+  const remaining = QUESTIONS.filter((item) => !asked.includes(item.id));
+  const ready = started && messages.length > 0;
+
   return (
-    <div id="chat" className="chat-section">
+    <div id="chat" className="chat-section" ref={sectionRef}>
       <div className="chat-grid">
         <div className="chat-sticky">
-          <div className="kicker">01 · The chat</div>
-          <h2 className="section-title">The conversation, basically</h2>
-          <p className="section-lead">
-            Everything a first coffee with me covers, minus the part where I
-            finish your plate before you do.
-          </p>
+          <SectionHead
+            num="01"
+            label="The chat"
+            title="The conversation, basically"
+            lead="Everything a first coffee with me covers, minus the part where I finish your plate before you do."
+          />
           <div className="chat-cup">
             <svg
               viewBox="0 0 80 80"
@@ -66,16 +124,57 @@ export default function Chat() {
             <div className="resume-caption">the formal version of all this</div>
           </div>
         </div>
-        <div className="bubbles">
-          {BUBBLES.map((b, i) => (
-            <div
-              key={i}
-              className={`bubble ${b.side}${b.final ? ' final' : ''}`}
-              style={{ animationDelay: `${b.delay}s` }}
-            >
-              {b.text}
+
+        <div className="chat-thread">
+          <div className="bubbles" aria-live="polite">
+            {messages.map((m, i) => (
+              <div key={i} className={`bubble ${m.side}${m.final ? ' final' : ''}`}>
+                {m.text}
+              </div>
+            ))}
+            {typing && (
+              <div className="bubble right typing" aria-label="Khushi is typing">
+                <span />
+                <span />
+                <span />
+              </div>
+            )}
+          </div>
+
+          {ready && remaining.length > 0 && (
+            <div className="chat-asks">
+              <div className="chat-asks-label">
+                {asked.length === 0 ? 'tap to ask →' : 'ask another →'}
+              </div>
+              <div className="chat-chips">
+                {remaining.map((item) => (
+                  <button
+                    type="button"
+                    key={item.id}
+                    className="chat-chip"
+                    onClick={() => ask(item)}
+                    disabled={typing}
+                  >
+                    {item.q}
+                  </button>
+                ))}
+              </div>
             </div>
-          ))}
+          )}
+
+          {ready && remaining.length === 0 && !typing && (
+            <div className="chat-done">
+              <span className="chat-done-note">that’s the first coffee done</span>
+              <a
+                href="https://calendar.app.google/WiQAN96fniavPuM39"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline"
+              >
+                book the second one →
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

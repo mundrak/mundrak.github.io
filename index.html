@@ -37,7 +37,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
       {
@@ -57,6 +57,16 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <style>
+        /* Without JavaScript nothing triggers the entrance animations, so show everything. */
+        .sec-head *, .route-stop *, .receipt-wrap, .paper, .paper-stamp, .polaroid,
+        .trail-stop, .trail-line, .luggage-tag, .route-end, .footer-title > span {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
