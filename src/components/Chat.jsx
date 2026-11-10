@@ -9,7 +9,7 @@ const BUBBLES = [
   {
     side: 'right',
     delay: 0.85,
-    text: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me feel. Been chasing that feeling from Chennai to Mumbai to Edinburgh to Bangkok.',
+    text: 'Mid-B.Tech, I ran my first campaign and felt more alive than any code review ever made me feel. Been chasing that feeling from Chennai to Mumbai to Edinburgh to Bengaluru.',
   },
   { side: 'left', delay: 1.1, text: "And when you're not working?" },
   {

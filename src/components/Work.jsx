@@ -1,59 +1,31 @@
-import { Fragment } from 'react';
-
 const SHOW_MASALA = true;
 
 const JOBS = [
   {
-    now: true,
-    meta: '2026 — · Remote, Bangkok 🇹🇭',
+    meta: 'May – Aug 2026 · Remote, Bangkok 🇹🇭',
     title: 'Marketing Consultant · SabaiHealth',
-    desc: 'Setting up marketing from scratch — the whole engine, zero to one.',
-    bullets: [
-      <><strong>Branding</strong> — identity, voice &amp; positioning built from the ground up</>,
-      <><strong>Social media</strong> — channels, content strategy &amp; calendar from day one</>,
-      <><strong>Meta ads</strong> — paid acquisition set up &amp; scaled end-to-end</>,
-      <><strong>Influencer marketing</strong> — sourcing, partnerships &amp; campaign management</>,
-    ],
+    desc: 'Walked into marketing spread across freelancers and agencies, with nobody holding the thread. Pulled it into one system, then put it to work.',
+    receipt: <><strong>3.7K → 36K+</strong> 7-day active users across five markets in three months, CAC under <strong>$0.44</strong></>,
   },
   {
-    meta: '2025 – 26 · Remote, Bengaluru 🇮🇳',
+    meta: '2025 – 26 · Bengaluru 🇮🇳',
     title: 'Sr. Marketing Associate · LVX',
-    desc: 'Brand launches and lead-gen engines — shoulder to shoulder with founders.',
-    bullets: [
-      <>Led the <strong>LetsVenture → LVX rebrand</strong> + brand identity for PhotonX, LVXQ &amp; PitchRoom</>,
-      <><strong>~480% lead growth</strong> via end-to-end email campaigns; <strong>1,000+ investor leads</strong> at ₹50 CPL on LinkedIn Ads</>,
-      <>Founder's brand: Substack subscribers <strong>+50%</strong>, content views <strong>~+1100%</strong></>,
-      <>Domain authority <strong>+25%</strong> through SEO; Instagram views <strong>+200%</strong></>,
-    ],
+    desc: 'Strategy at 10am, execution by lunch. Helped turn LetsVenture into LVX, and learnt that brand, content and numbers are really one job.',
+    receipt: <><strong>1,000+ investor leads</strong> at <strong>₹50</strong> each on LinkedIn Ads</>,
   },
   {
     meta: '2023 – 24 · Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿',
     title: 'MSc · University of Edinburgh',
-    desc: 'Business School by day, ResLife and a Greggs counter by night. Character-building, highly recommend.',
-    bullets: [
-      <>MSc Management with <strong>distinction</strong> in dissertation</>,
-      <>Resident Assistant — <strong>36 engagement programs</strong>, participation <strong>+20%</strong>, 58 residents</>,
-      <><strong>Global Employability Award</strong> + <strong>Edinburgh Award</strong></>,
-    ],
+    desc: 'Business School by day, ResLife and a Greggs counter by night. 58 residents taught me people; the counter taught me brand loyalty.',
+    receipt: <><strong>Distinction</strong> in dissertation, <strong>Edinburgh Award</strong></>,
     scribble: 'what ma, ask me about the sausage rolls',
   },
   {
-    meta: '2021 – 23 · Remote, Mumbai 🇮🇳',
+    meta: '2021 – 23 · Mumbai 🇮🇳',
     title: 'Marketing Ops · Miko',
-    desc: 'Sold robots to kids and logic to their parents. Intern → full-time in 18 months.',
-    bullets: [
-      <>Multi-channel CRM campaigns (Airship) — email open rates <strong>+20%</strong>, CTR <strong>+15%</strong></>,
-      <>Mixpanel-driven targeting &amp; messaging optimisation</>,
-      <>Curated &amp; onboarded content for <strong>300+ apps</strong> on the Miko robot</>,
-    ],
+    desc: 'Sold robots to kids and logic to their parents. Where the engineer in me found out marketing has data, problems and room to experiment.',
+    receipt: <>Intern → full-time in <strong>18 months</strong></>,
   },
-];
-
-const STACK = [
-  { label: 'CRM', tools: ['Zoho', 'Airship', 'Mailchimp', 'HubSpot'] },
-  { label: 'Ads', tools: ['Meta Ads', 'LinkedIn Ads'] },
-  { label: 'Design', tools: ['Figma', 'Canva'] },
-  { label: 'Analytics', tools: ['Mixpanel', 'Google Analytics', 'Google Search Console'] },
 ];
 
 export default function Work() {
@@ -70,45 +42,29 @@ export default function Work() {
           <div className="work-scribble">jeevan = brand building, basically</div>
         )}
       </div>
+      <p className="work-intro">
+        Four stops, one pattern: walk into something messy, figure out what needs to
+        change, build the thing that works. The formal version lives in my{' '}
+        <a href="/khushi-mundra-resume.pdf" target="_blank" rel="noreferrer" className="link-underline">
+          résumé
+        </a>
+        .
+      </p>
       <div className="work-grid">
         {JOBS.map((job, i) => (
           <div className="work-card" key={i}>
-            {job.now && <div className="work-badge-now">NOW</div>}
             <div className="work-meta">{job.meta}</div>
             <div className="work-title">{job.title}</div>
             <p className="work-desc">{job.desc}</p>
-            <div className="work-bullets">
-              {job.bullets.map((b, bi) => (
-                <div className="work-bullet" key={bi}>
-                  <span className="work-bullet-arrow">→</span>
-                  <span>{b}</span>
-                </div>
-              ))}
+            <div className="work-receipt">
+              <span className="work-receipt-label">receipt</span>
+              <span>{job.receipt}</span>
             </div>
             {job.scribble && SHOW_MASALA && (
               <div className="work-scribble-note">{job.scribble}</div>
             )}
           </div>
         ))}
-      </div>
-
-      <div className="toolbox-card">
-        <div className="toolbox-title">The toolbox 🛠</div>
-        <div className="toolbox-grid">
-          {STACK.map((row) => (
-            <Fragment key={row.label}>
-              <div className="toolbox-label">{row.label}</div>
-              <div className="toolbox-tools">
-                {row.tools.map((tool) => (
-                  <span className="toolbox-tool" key={tool}>
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </Fragment>
-          ))}
-        </div>
-        <div className="toolbox-scribble">the stack behind the stories</div>
       </div>
 
       <div className="pikachu-card">

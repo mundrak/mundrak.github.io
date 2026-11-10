@@ -18,8 +18,9 @@ export default function Hero() {
           </h1>
           <p className="hero-lead">
             I am Khushi — engineer by degree, marketer by destiny, foodie by
-            heart. Currently making healthcare feel human at SabaiHealth,
-            Bangkok. Pull up a chair, the coffee's on me.
+            heart. Most recently took SabaiHealth from 3.7K to 36K+ users. Now
+            in Bengaluru, looking for the next mess to untangle. Pull up a
+            chair, the coffee's on me.
           </p>
           <div className="hero-chips">
             <span
