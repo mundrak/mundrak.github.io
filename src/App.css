@@ -42,6 +42,33 @@
 .nav-links a:hover {
   color: var(--orange);
 }
+.nav-links a:not(.nav-cta) {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  background: linear-gradient(var(--mustard), var(--mustard)) no-repeat 0 90% / 0% 36%;
+  transition: background-size 0.3s ease, color 0.2s;
+}
+.nav-num {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+}
+.nav-links a.is-active {
+  color: var(--ink);
+  background-size: 100% 36%;
+}
+.nav-progress {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 3px;
+  width: 100%;
+  background: var(--orange);
+  transform: scaleX(var(--read, 0));
+  transform-origin: left;
+}
 .nav-cta {
   color: var(--ink) !important;
   background: var(--mustard);
@@ -1771,42 +1798,6 @@
   margin-top: 40px;
   overflow: hidden;
 }
-.footer-ticker {
-  background: var(--mustard);
-  color: var(--ink);
-  transform: rotate(-1.2deg) scale(1.02);
-  margin-top: -14px;
-  padding: 12px 0;
-  overflow: hidden;
-}
-.footer-ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker 28s linear infinite;
-}
-.footer-ticker:hover .footer-ticker-track {
-  animation-play-state: paused;
-}
-.footer-ticker-group {
-  display: flex;
-  flex-shrink: 0;
-}
-.footer-ticker-group span {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  padding-right: 22px;
-}
-.footer-ticker-group i {
-  font-style: normal;
-  color: var(--orange);
-  padding-left: 14px;
-}
-@keyframes ticker {
-  to { transform: translateX(-50%); }
-}
 .footer-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -1991,9 +1982,6 @@
   .footer-bottom {
     justify-content: center;
     text-align: center;
-  }
-  .footer-ticker-group span {
-    font-size: 16px;
   }
   .footer-inner {
     padding-top: 60px;

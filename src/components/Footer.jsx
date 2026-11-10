@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import useReveal from './useReveal';
 
-const SHOW_MASALA = true;
 const EMAIL = 'mundrakhushi22@gmail.com';
 
 const SOCIALS = [
@@ -10,8 +9,6 @@ const SOCIALS = [
   { label: 'Medium', href: 'https://medium.com/@mundrakhushi22' },
   { label: 'X (Twitter)', href: 'https://x.com/mundrakhushi' },
 ];
-
-const TICKER = ['areee', 'chalo baat karte hain', 'coffee? my treat', 'sahi hai'];
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
@@ -29,22 +26,6 @@ export default function Footer() {
 
   return (
     <div className="footer">
-      {SHOW_MASALA && (
-        <div className="footer-ticker" aria-hidden="true">
-          <div className="footer-ticker-track">
-            {[0, 1].map((copy) => (
-              <div className="footer-ticker-group" key={copy}>
-                {[...TICKER, ...TICKER].map((word, i) => (
-                  <span key={i}>
-                    {word} <i>✦</i>
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       <div className="footer-inner" ref={ref}>
         <div className="footer-status">
           <span className="footer-status-dot" />
