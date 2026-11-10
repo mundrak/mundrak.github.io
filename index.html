@@ -57,6 +57,16 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <style>
+        /* Without JavaScript nothing triggers the entrance animations, so show everything. */
+        .sec-head *, .route-stop *, .receipt-wrap, .paper, .paper-stamp, .polaroid,
+        .trail-stop, .trail-line, .luggage-tag, .route-end, .footer-title > span {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
