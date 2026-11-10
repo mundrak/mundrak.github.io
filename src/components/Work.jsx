@@ -23,8 +23,8 @@ const JOBS = [
   {
     meta: '2021 – 23 · Mumbai 🇮🇳',
     title: 'Marketing Ops · Miko',
-    desc: 'Sold robots to kids and logic to their parents. Where the engineer in me found out marketing has data, problems and room to experiment.',
-    receipt: <>Intern → full-time in <strong>18 months</strong></>,
+    desc: 'Started out building learning content for a kids’ robot, then moved into CRM. Where the engineer in me found out marketing has data, problems and room to experiment.',
+    receipt: <>Email open rates <strong>+20%</strong>, CTR <strong>+15%</strong> on Airship campaigns; content for <strong>300+ apps</strong></>,
   },
 ];
 
