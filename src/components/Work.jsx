@@ -1,136 +1,116 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
+import useReveal from './useReveal';
 
 const SHOW_MASALA = true;
 
 const JOBS = [
   {
-    meta: 'May – Aug 2026 · Remote, Bangkok 🇹🇭',
     when: 'May – Aug 2026',
     stamp: 'BKK',
     place: 'Bangkok, remote',
     title: 'Marketing Consultant · SabaiHealth',
     desc: 'Walked into marketing spread across freelancers and agencies, with nobody holding the thread. Pulled it into one system, then put it to work.',
-    price: '3.7K → 36K+ users',
     receipt: <><strong>3.7K → 36K+</strong> 7-day active users across five markets in three months, CAC under <strong>$0.44</strong></>,
   },
   {
-    meta: '2025 – 26 · Bengaluru 🇮🇳',
     when: '2025 – 26',
     stamp: 'BLR',
     place: 'Bengaluru',
     title: 'Sr. Marketing Associate · LVX',
     desc: 'Strategy at 10am, execution by lunch. Helped turn LetsVenture into LVX, and learnt that brand, content and numbers are really one job.',
-    price: '1,000+ leads @ ₹50',
     receipt: <><strong>1,000+ investor leads</strong> at <strong>₹50</strong> each on LinkedIn Ads</>,
   },
   {
-    meta: '2023 – 24 · Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿',
     when: '2023 – 24',
     stamp: 'EDI',
     place: 'Edinburgh',
     title: 'MSc · University of Edinburgh',
     desc: 'Business School by day, ResLife and a Greggs counter by night. 58 residents taught me people; the counter taught me brand loyalty.',
-    price: 'Distinction',
     receipt: <><strong>Distinction</strong> in dissertation, <strong>Edinburgh Award</strong></>,
     scribble: 'what ma, ask me about the sausage rolls',
   },
   {
-    meta: '2021 – 23 · Mumbai 🇮🇳',
     when: '2021 – 23',
     stamp: 'BOM',
     place: 'Mumbai',
     title: 'Marketing Ops · Miko',
     desc: 'Started out building learning content for a kids’ robot, then moved into CRM. Where the engineer in me found out marketing has data, problems and room to experiment.',
-    price: '+20% opens · +15% CTR',
     receipt: <>Email open rates <strong>+20%</strong>, CTR <strong>+15%</strong> on Airship campaigns; analysed content of <strong>300+ apps</strong></>,
   },
 ];
 
-const IS_PREVIEW = Boolean(import.meta.env.VITE_PREVIEW);
-const VARIANTS = ['menu', 'route', 'cards'];
-
-function MenuView() {
+function Stop({ job, index }) {
+  const ref = useReveal(0.3);
   return (
-    <div className="menu-card">
-      <div className="menu-inner">
-        <div className="menu-top">
-          <div className="menu-title">The Menu</div>
-          <div className="menu-sub">house specials · brewed fresh since 2021</div>
+    <div className="route-stop" ref={ref}>
+      <div className="route-stamp" style={{ '--tilt': `${index % 2 ? 7 : -8}deg` }}>
+        <span>{job.stamp}</span>
+      </div>
+      <div className="ticket">
+        <div className="ticket-main">
+          <div className="work-title">{job.title}</div>
+          <p className="work-desc">{job.desc}</p>
+          {job.scribble && SHOW_MASALA && <div className="ticket-scribble">{job.scribble}</div>}
         </div>
-        {JOBS.map((job, i) => (
-          <div className="menu-item" key={i}>
-            <div className="menu-row">
-              <span className="menu-name">{job.title}</span>
-              <span className="menu-leader" aria-hidden="true" />
-              <span className="menu-price">{job.price}</span>
-            </div>
-            <div className="menu-meta">{job.meta}</div>
-            <p className="menu-desc">{job.desc}</p>
-            <div className="menu-proof">
-              <span className="work-receipt-label">proof</span>
-              <span>{job.receipt}</span>
-            </div>
-            {job.scribble && SHOW_MASALA && <div className="menu-scribble">{job.scribble}</div>}
-          </div>
-        ))}
-        <div className="menu-foot">all items served with strategy AND execution</div>
+        <div className="ticket-stub">
+          <div className="ticket-label">when</div>
+          <div className="ticket-value">{job.when}</div>
+          <div className="ticket-label">where</div>
+          <div className="ticket-value">{job.place}</div>
+          <div className="ticket-label">proof</div>
+          <div className="ticket-proof">{job.receipt}</div>
+        </div>
       </div>
     </div>
   );
 }
 
-function RouteView() {
+function Route() {
+  const routeRef = useRef(null);
+  const endRef = useReveal(0.6);
+
+  // The route line "travels" down as the visitor scrolls through the stops.
+  useEffect(() => {
+    const route = routeRef.current;
+    let frame = null;
+    const update = () => {
+      frame = null;
+      const rect = route.getBoundingClientRect();
+      const anchor = window.innerHeight * 0.6;
+      const progress = Math.min(Math.max((anchor - rect.top) / rect.height, 0), 1);
+      route.style.setProperty('--progress', progress.toFixed(4));
+    };
+    const onScroll = () => {
+      if (frame === null) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
-    <div className="route">
+    <div className="route" ref={routeRef}>
+      <div className="route-line" aria-hidden="true">
+        <div className="route-line-fill" />
+        <div className="route-plane">✈</div>
+      </div>
       <div className="route-start">latest stop first ↓</div>
       {JOBS.map((job, i) => (
-        <div className="route-stop" key={i}>
-          <div className="route-stamp" style={{ transform: `rotate(${i % 2 ? 7 : -8}deg)` }}>
-            <span>{job.stamp}</span>
-          </div>
-          <div className="ticket">
-            <div className="ticket-main">
-              <div className="work-title">{job.title}</div>
-              <p className="work-desc">{job.desc}</p>
-              {job.scribble && SHOW_MASALA && <div className="menu-scribble">{job.scribble}</div>}
-            </div>
-            <div className="ticket-stub">
-              <div className="ticket-label">when</div>
-              <div className="ticket-value">{job.when}</div>
-              <div className="ticket-label">where</div>
-              <div className="ticket-value">{job.place}</div>
-              <div className="ticket-label">proof</div>
-              <div className="ticket-proof">{job.receipt}</div>
-            </div>
-          </div>
-        </div>
+        <Stop job={job} index={i} key={job.stamp} />
       ))}
-      <div className="route-end">next stop: yours? ✈</div>
-    </div>
-  );
-}
-
-function CardsView() {
-  return (
-    <div className="work-grid">
-      {JOBS.map((job, i) => (
-        <div className="work-card" key={i}>
-          <div className="work-meta">{job.meta}</div>
-          <div className="work-title">{job.title}</div>
-          <p className="work-desc">{job.desc}</p>
-          <div className="work-receipt">
-            <span className="work-receipt-label">proof</span>
-            <span>{job.receipt}</span>
-          </div>
-          {job.scribble && SHOW_MASALA && <div className="work-scribble-note">{job.scribble}</div>}
-        </div>
-      ))}
+      <div className="route-end" ref={endRef}>
+        next stop: yours? ✈
+      </div>
     </div>
   );
 }
 
 export default function Work() {
-  const [variant, setVariant] = useState('menu');
   return (
     <div id="work" className="work-section">
       <div className="kicker">02 · The work</div>
@@ -153,25 +133,7 @@ export default function Work() {
         .
       </p>
 
-      {IS_PREVIEW && (
-        <div className="preview-switch">
-          <span>preview only · work layout:</span>
-          {VARIANTS.map((v) => (
-            <button
-              type="button"
-              key={v}
-              className={v === variant ? 'is-on' : ''}
-              onClick={() => setVariant(v)}
-            >
-              {v === 'cards' ? 'cards (current)' : v}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {variant === 'menu' && <MenuView />}
-      {variant === 'route' && <RouteView />}
-      {variant === 'cards' && <CardsView />}
+      <Route />
 
       <div className="pikachu-card" id="pikachu-story">
         <div>
