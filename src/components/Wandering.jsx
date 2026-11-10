@@ -69,10 +69,6 @@ export default function Wandering() {
             {i < LIVED.length - 1 && <span className="wander-arrow">→</span>}
           </Fragment>
         ))}
-        <span className="pill-final-wrap">
-          <span className="wander-arrow">→</span>
-          <span className="pill-final">working remote, from anywhere ☀️</span>
-        </span>
       </div>
 
       <div className="wander-row wandered">
