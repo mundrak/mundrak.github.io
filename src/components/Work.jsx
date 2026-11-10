@@ -24,7 +24,7 @@ const JOBS = [
     meta: '2021 – 23 · Mumbai 🇮🇳',
     title: 'Marketing Ops · Miko',
     desc: 'Started out building learning content for a kids’ robot, then moved into CRM. Where the engineer in me found out marketing has data, problems and room to experiment.',
-    receipt: <>Email open rates <strong>+20%</strong>, CTR <strong>+15%</strong> on Airship campaigns; content for <strong>300+ apps</strong></>,
+    receipt: <>Email open rates <strong>+20%</strong>, CTR <strong>+15%</strong> on Airship campaigns; analysed content of <strong>300+ apps</strong></>,
   },
 ];
 
