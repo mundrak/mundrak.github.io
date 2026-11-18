@@ -6,6 +6,14 @@ const SHOW_MASALA = true;
 
 const JOBS = [
   {
+    when: '2026 – now',
+    stamp: 'BLR',
+    place: 'Bengaluru, in office',
+    title: 'Product Operations Associate · CheQ',
+    desc: 'Swapped campaigns for the product side. Same instinct, new seat: figure out what is not working, then build the system that fixes it.',
+    receipt: <>Just landed. <strong>Receipts loading</strong></>,
+  },
+  {
     when: 'May – Aug 2026',
     stamp: 'BKK',
     place: 'Bangkok, remote',
@@ -102,7 +110,7 @@ function Route() {
       </div>
       <div className="route-start">latest stop first ↓</div>
       {JOBS.map((job, i) => (
-        <Stop job={job} index={i} key={job.stamp} />
+        <Stop job={job} index={i} key={job.title} />
       ))}
       <div className="route-end" ref={endRef}>
         next stop: yours? ✈
@@ -127,7 +135,7 @@ export default function Work() {
         scribble={SHOW_MASALA && 'jeevan = brand building, basically'}
       />
       <p className="work-intro">
-        Four stops, one pattern: walk into something messy, figure out what needs to
+        Five stops, one pattern: walk into something messy, figure out what needs to
         change, build the thing that works. The formal version lives in my{' '}
         <a href="/khushi-mundra-resume.pdf" target="_blank" rel="noreferrer" className="link-underline">
           résumé
