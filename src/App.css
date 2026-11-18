@@ -1807,28 +1807,6 @@
   text-align: center;
   position: relative;
 }
-.footer-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1.5px solid rgba(253, 246, 236, 0.25);
-  border-radius: 100px;
-  padding: 7px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--cream-muted);
-}
-.footer-status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #7fd18b;
-  box-shadow: 0 0 0 0 rgba(127, 209, 139, 0.6);
-  animation: statusPulse 1.8s ease-out infinite;
-}
-@keyframes statusPulse {
-  to { box-shadow: 0 0 0 10px rgba(127, 209, 139, 0); }
-}
 .footer-title {
   font-family: 'Archivo Black', sans-serif;
   font-size: clamp(44px, 9vw, 112px);

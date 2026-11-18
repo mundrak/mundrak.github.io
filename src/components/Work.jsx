@@ -6,7 +6,7 @@ const SHOW_MASALA = true;
 
 const JOBS = [
   {
-    when: '2026 – now',
+    when: 'November 2026',
     stamp: 'BLR',
     place: 'Bengaluru, in office',
     title: 'Product Operations Associate · CheQ',

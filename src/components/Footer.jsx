@@ -27,11 +27,6 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="footer-inner" ref={ref}>
-        <div className="footer-status">
-          <span className="footer-status-dot" />
-          open to new roles · Bengaluru
-        </div>
-
         <h2 className="footer-title">
           <span>Coffee?</span> <span>My treat.</span>
           <svg className="footer-cup" viewBox="0 0 80 80" fill="none" strokeWidth="3.5" strokeLinecap="round" aria-hidden="true">
