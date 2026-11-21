@@ -17,7 +17,7 @@ const JOBS = [
     when: 'May – Aug 2026',
     stamp: 'BKK',
     place: 'Bangkok, remote',
-    title: 'Marketing Consultant · SabaiHealth',
+    title: 'Marketing Manager · SabaiHealth',
     desc: 'Walked into marketing spread across freelancers and agencies, with nobody holding the thread. Pulled it into one system, then put it to work.',
     receipt: <><strong>3.7K → 36K+</strong> 7-day active users across five markets in three months, CAC under <strong>$0.44</strong></>,
   },
