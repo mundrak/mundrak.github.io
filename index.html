@@ -2,9 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#fdf6ec" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#f7f6f2" />
+
+    <script>
+      // Old links like mundrak.github.io/#work pointed at sections of the fun site.
+      (function () {
+        var ids = ['top', 'chat', 'work', 'references', 'writing', 'wandering'];
+        var h = location.hash.slice(1);
+        if (h && ids.indexOf(h) !== -1) location.replace('/fun/#' + h);
+      })();
+    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JQEH8WVJP"></script>
@@ -15,59 +24,170 @@
       gtag('config', 'G-3JQEH8WVJP');
     </script>
 
-    <title>Khushi Mundra - Coffee par Charcha</title>
-    <meta name="description" content="Khushi Mundra — engineer by degree, marketer by destiny, foodie by heart. Marketer in Bengaluru, open to new roles." />
+    <title>Khushi Mundra</title>
+    <meta name="description" content="Khushi Mundra: turning chaos into calm, one coffee at a time. Pick the short, focused version or the full coffee chat." />
     <link rel="canonical" href="https://mundrak.github.io/" />
 
-    <!-- Open Graph / social sharing -->
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="khushi." />
     <meta property="og:url" content="https://mundrak.github.io/" />
-    <meta property="og:title" content="Khushi Mundra - Coffee par Charcha" />
-    <meta property="og:description" content="Khushi Mundra — engineer by degree, marketer by destiny, foodie by heart. Marketer in Bengaluru, open to new roles." />
+    <meta property="og:title" content="Khushi Mundra" />
+    <meta property="og:description" content="Turning chaos into calm, one coffee at a time. Pick focus or fun." />
     <meta property="og:image" content="https://mundrak.github.io/og-image-2026-11.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Khushi Mundra - Coffee par Charcha" />
-    <meta name="twitter:description" content="Khushi Mundra — engineer by degree, marketer by destiny, foodie by heart. Marketer in Bengaluru, open to new roles." />
+    <meta name="twitter:title" content="Khushi Mundra" />
+    <meta name="twitter:description" content="Turning chaos into calm, one coffee at a time. Pick focus or fun." />
     <meta name="twitter:image" content="https://mundrak.github.io/og-image-2026-11.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400&family=Space+Grotesk:wght@500;700&family=Archivo+Black&family=Caveat:wght@600&display=swap">
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Khushi Mundra",
-        "url": "https://mundrak.github.io/",
-        "jobTitle": "Marketer",
-        "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
-        "sameAs": [
-          "https://www.linkedin.com/in/mundrakhushi/",
-          "https://khushimundra.substack.com/",
-          "https://medium.com/@mundrakhushi22",
-          "https://x.com/mundrakhushi"
-        ]
+    <style>
+      /* Chooser: a neutral top band, then two doors. Each door is dressed as the version it opens. */
+      :root {
+        --bg: #f7f6f2; --ink: #141414; --soft: #5a5955;
+        /* focus door */
+        --f-bg: #eeeeec; --f-row: #e2e2df; --f-ink: #0d0d0d; --f-soft: #3b3b3a; --f-faint: #666664;
+        /* fun door, from the fun site */
+        --u-bg: #fdf6ec; --u-ink: #33291f; --u-soft: #5c503f; --u-border: #f0e4d0; --u-orange: #e2603f; --u-mustard: #ffd98e; --u-peach: #fbd3c0; --u-sage: #d9e6c3;
+
+        --sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        --mono: "Space Mono", ui-monospace, Menlo, monospace;
+        --grotesk: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+        --display: "Archivo Black", "Arial Black", sans-serif;
+        --hand: "Caveat", "Segoe Script", cursive;
       }
-    </script>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; }
+      body { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      p { margin: 0; }
+      @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+      .wrap {
+        min-height: 100vh; min-height: 100dvh;
+        display: flex; flex-direction: column; gap: 28px;
+        max-width: 1120px; margin: 0 auto;
+        padding: clamp(28px, 6vh, 64px) max(20px, env(safe-area-inset-right, 0px)) 28px max(20px, env(safe-area-inset-left, 0px));
+      }
+      .head { display: flex; flex-direction: column; gap: 10px; }
+      .name { font-family: var(--mono); font-size: 12.5px; color: var(--soft); letter-spacing: 0.02em; }
+      h1 { margin: 0; font-size: clamp(32px, 5.4vw, 52px); line-height: 1.04; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance; }
+      .sub { font-size: clamp(15px, 2.2vw, 17px); color: var(--soft); }
+
+      .doors { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-height: 420px; }
+      .door {
+        position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
+        padding: clamp(24px, 3.4vw, 40px); border-radius: 22px; overflow: hidden;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      .door:hover { transform: translateY(-4px); }
+      .door:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+      .door-top { display: flex; flex-direction: column; gap: 14px; }
+      .door-cta { display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; padding: 12px 20px; border-radius: 999px; transition: gap 200ms ease; }
+      .door:hover .door-cta { gap: 14px; }
+
+      /* focus door */
+      .focus { background: var(--f-bg); color: var(--f-ink); box-shadow: inset 0 0 0 1px #dcdcd9; }
+      .focus:hover { box-shadow: inset 0 0 0 1px #c9c9c5, 0 18px 40px -22px rgba(0,0,0,.35); }
+      .focus .tag { font-family: var(--mono); font-size: 12px; color: var(--f-faint); }
+      .focus h2 { margin: 0; font-family: var(--sans); font-size: clamp(28px, 3.6vw, 40px); line-height: 1.05; font-weight: 600; letter-spacing: -0.035em; }
+      .focus p { font-size: 16px; line-height: 1.55; color: var(--f-soft); max-width: 30ch; }
+      .mini { display: flex; flex-direction: column; gap: 2px; }
+      .mini div { display: grid; grid-template-columns: 70px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 12px; margin: 0 -12px; border-radius: 10px; font-size: 14px; }
+      .mini div:nth-child(2) { background: var(--f-row); }
+      .mini span:first-child { font-family: var(--mono); font-size: 11px; color: var(--f-faint); }
+      .mini b { font-weight: 500; }
+      .mini span:last-child { font-family: var(--mono); font-size: 11px; color: var(--f-faint); }
+      .focus .door-cta { background: var(--f-ink); color: var(--f-bg); }
+
+      /* fun door */
+      .fun { background: var(--u-bg); color: var(--u-ink); box-shadow: inset 0 0 0 1px var(--u-border); font-family: var(--grotesk); }
+      .fun:hover { box-shadow: inset 0 0 0 1px #e6d3b3, 0 18px 40px -22px rgba(120,70,20,.45); }
+      .fun .tag { font-family: var(--mono); font-size: 12px; color: var(--u-orange); }
+      .fun .hello { font-family: var(--hand); font-size: 30px; line-height: 1; color: var(--u-orange); transform: rotate(-3deg); transform-origin: left; }
+      .fun h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.02; letter-spacing: -0.01em; }
+      .fun h2 mark { background: linear-gradient(var(--u-mustard), var(--u-mustard)) no-repeat 0 85% / 100% 38%; color: inherit; }
+      .fun p { font-size: 16px; line-height: 1.55; color: var(--u-soft); max-width: 32ch; }
+      .stickers { display: flex; flex-wrap: wrap; gap: 8px; }
+      .stickers span { font-size: 13.5px; font-weight: 500; padding: 7px 13px; border-radius: 999px; border: 1.5px dashed var(--u-ink); transform: rotate(var(--r, 0deg)); }
+      .stickers span:nth-child(1) { background: var(--u-peach); --r: -2deg; }
+      .stickers span:nth-child(2) { background: var(--u-sage); --r: 1.5deg; }
+      .stickers span:nth-child(3) { background: var(--u-mustard); --r: -1deg; }
+      .fun .door-cta { background: var(--u-mustard); color: var(--u-ink); font-family: var(--grotesk); font-weight: 700; }
+      .fun:hover .door-cta { background: var(--u-orange); color: #fff; }
+      .cup { position: absolute; right: clamp(20px, 3vw, 36px); top: clamp(20px, 3vw, 36px); width: 54px; height: 54px; stroke: var(--u-ink); }
+      .steam { animation: steam 2s ease-in-out infinite; }
+      @keyframes steam { 0%, 100% { opacity: .3; transform: translateY(2px); } 50% { opacity: 1; transform: translateY(-2px); } }
+
+      .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--soft); }
+      .foot kbd { font-family: var(--mono); font-size: 11px; padding: 1px 6px; border-radius: 4px; border: 1px solid #d8d6cf; }
+
+      @media (max-width: 760px) {
+        .doors { grid-template-columns: 1fr; min-height: 0; }
+        .door { min-height: 340px; }
+        .foot .keys { display: none; }
+      }
+    </style>
   </head>
   <body>
-    <noscript>
-      <style>
-        /* Without JavaScript nothing triggers the entrance animations, so show everything. */
-        .sec-head *, .route-stop *, .receipt-wrap, .paper, .paper-stamp, .polaroid,
-        .trail-stop, .trail-line, .luggage-tag, .route-end, .footer-title > span {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-      </style>
-    </noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <main class="wrap">
+      <header class="head">
+        <span class="name">khushi mundra</span>
+        <h1>How do you want to meet me?</h1>
+        <p class="sub">Same person, two moods. You can switch any time.</p>
+      </header>
+
+      <div class="doors">
+        <a class="door focus" href="/focus/" aria-label="Focus mode: the short version">
+          <div class="door-top">
+            <span class="tag">focus mode</span>
+            <h2>The short version.</h2>
+            <p>Work, projects and writing on one calm page. Two minutes, no distractions.</p>
+          </div>
+          <div class="mini" aria-hidden="true">
+            <div><span>now</span><b>CheQ</b><span>bengaluru</span></div>
+            <div><span>before</span><b>SabaiHealth</b><span>2026</span></div>
+            <div><span>projects</span><b>ghoomo</b><span>ai app</span></div>
+          </div>
+          <span class="door-cta">go to focus <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="door fun" href="/fun/" aria-label="Fun mode: the full coffee chat">
+          <svg class="cup" viewBox="0 0 80 80" fill="none" stroke-width="3.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 34 h38 v22 c0 8 -8 14 -19 14 c-11 0 -19 -6 -19 -14 Z" />
+            <path d="M56 40 c10 -2 14 4 10 10 c-3 5 -8 5 -11 4" />
+            <path class="steam" d="M28 26 c-3 -4 3 -6 0 -10 M40 26 c-3 -4 3 -6 0 -10" />
+          </svg>
+          <div class="door-top">
+            <span class="tag">fun mode</span>
+            <span class="hello">Areeee,</span>
+            <h2>The full <mark>coffee chat.</mark></h2>
+            <p>Stories, receipts, a photo dump and a Pikachu. Pull up a chair.</p>
+          </div>
+          <div class="stickers" aria-hidden="true">
+            <span>the work</span><span>the receipts</span><span>the wandering</span>
+          </div>
+          <span class="door-cta">go to fun <span aria-hidden="true">☕</span></span>
+        </a>
+      </div>
+
+      <footer class="foot">
+        <span>Both pages have a switch at the top.</span>
+        <span class="keys">or press <kbd>F</kbd> for focus, <kbd>U</kbd> for fun</span>
+      </footer>
+    </main>
+
+    <script>
+      document.addEventListener('keydown', function (e) {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        var k = e.key.toLowerCase();
+        if (k === 'f') location.href = '/focus/';
+        else if (k === 'u') location.href = '/fun/';
+      });
+    </script>
   </body>
 </html>

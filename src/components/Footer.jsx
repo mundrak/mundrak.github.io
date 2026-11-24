@@ -72,6 +72,9 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>Made with ☕ and one plot twist · Khushi Mundra</span>
+          <a href="/focus/" className="footer-switch">
+            prefer the short version? focus mode →
+          </a>
           <button
             type="button"
             className="footer-top"
