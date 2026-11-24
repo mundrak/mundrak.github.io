@@ -93,6 +93,9 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
+          <a href="/focus/" className="nav-switch" onClick={close}>
+            focus mode
+          </a>
           <a
             href="mailto:mundrakhushi22@gmail.com"
             className="nav-cta"

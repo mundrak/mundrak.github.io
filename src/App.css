@@ -69,6 +69,27 @@
   transform: scaleX(var(--read, 0));
   transform-origin: left;
 }
+/* Switch to the focus version of the site. */
+.nav-links a.nav-switch {
+  font-size: 13.5px;
+  padding: 7px 14px;
+  border: 1.5px dashed var(--ink-soft);
+  border-radius: 100px;
+  background: none;
+  color: var(--ink-soft);
+}
+.nav-links a.nav-switch:hover {
+  border-style: solid;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.footer-switch {
+  color: var(--mustard);
+  font-weight: 600;
+}
+.footer-switch:hover {
+  color: var(--orange);
+}
 .nav-cta {
   color: var(--ink) !important;
   background: var(--mustard);
