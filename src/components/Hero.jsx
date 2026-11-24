@@ -17,10 +17,10 @@ export default function Hero() {
             you found me.
           </h1>
           <p className="hero-lead">
-            I am Khushi — engineer by degree, marketer by destiny, foodie by
-            heart. Most recently took SabaiHealth from 3.7K to 36K+ users. Now
-            in Bengaluru, looking for the next mess to untangle. Pull up a
-            chair, the coffee's on me.
+            I am Khushi — engineer by degree, foodie by heart, turning chaos
+            into calm one coffee at a time. Most recently took SabaiHealth from
+            3.7K to 36K+ users. Now at CheQ in Bengaluru, untangling the next
+            mess. Pull up a chair, the coffee's on me.
           </p>
           <div className="hero-chips">
             <span
